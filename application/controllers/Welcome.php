@@ -1,0 +1,280 @@
+<?php
+session_start();
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Welcome extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see https://codeigniter.com/user_guide/general/urls.html
+	 */
+    private $conn;
+	function __construct(){
+		parent::__construct();
+		$this->load->helper('url');
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$db = "kost";
+		$this->conn = mysqli_connect($servername, $username, $password, $db);
+	}
+
+	public function index(){
+		$this->load->view('home/head_home');
+		$this->load->view('home/konten');
+		$this->load->view('home/foot_home');
+	}
+
+	public function login_pencari(){
+		$this->load->view('login/head_login');
+		$this->load->view('login/login_pencari');
+		$this->load->view('login/foot_login');
+	}
+
+
+    public function login_pemilik(){
+        $this->load->view('login/head_login');
+        $this->load->view('login/login_pemilik');
+        $this->load->view('login/foot_login');
+    }
+
+	public function login_admin(){
+		$this->load->view('login/head_login');
+		$this->load->view('login/login_admin');
+		$this->load->view('login/foot_login');
+	}
+
+	public function registrasi_pencari(){
+		$this->load->view('registrasi/head_regis');
+		$this->load->view('registrasi/registrasi_pencari');
+		$this->load->view('registrasi/foot_regis');
+	}
+
+	public function registrasi_pemilik(){
+		$this->load->view('registrasi/head_regis');
+		$this->load->view('registrasi/registrasi_pemilik');
+		$this->load->view('registrasi/foot_regis');
+	}
+
+	public function registrasi_admin(){
+		$this->load->view('registrasi/head_regis');
+		$this->load->view('registrasi/registrasi_admin');
+		$this->load->view('registrasi/foot_regis');
+	}
+
+    public function proses_login(){
+        if (isset($_GET['admin'])) {
+            $sql      = "SELECT * FROM admin;";
+            $result   = $this->conn->query($sql);
+            while ($row=$result->fetch_assoc()) { 
+                if ($_POST['username']==$row['username'] && md5($_POST['password'])==$row['password']) {
+                    $_SESSION['username']=$row['username'];
+                    $_SESSION['admin']='admin';
+                    header("location: ".base_url('index.php/admin'));
+                    break;
+                } else{
+                    
+                }
+            }
+            if (empty($_SESSION['username'])) {
+                    echo "<script> alert('Username atau Password Salah'); </script>";
+                session_destroy();
+                    header("location: ".base_url('index.php/Welcome/login_admin'));
+            }
+        } elseif (isset($_GET['pencari'])) {
+            $sql      = "SELECT * FROM pencari;";
+            $result   = $this->conn->query($sql);
+            while ($row=$result->fetch_assoc()) { 
+                if ($_POST['id_pencari']==$row['id_pencari'] && md5($_POST['password'])==$row['password']) {
+                    $_SESSION['id_pencari']=$row['id_pencari'];
+                    $_SESSION['pencari']='pencari';
+                    header("location: ".base_url('index.php/pencari'));
+                    break;
+                } else{
+                    
+                }
+            }
+            if (empty($_SESSION['id_pencari'])) {
+                echo "<script> alert('Username atau Password Salah'); </script>";
+                session_destroy();
+                header("location: ".base_url('index.php/Welcome/login_pencari'));
+            }
+        } elseif (isset($_GET['pemilik'])) {
+            $sql      = "SELECT * FROM pemilik;";
+            $result   = $this->conn->query($sql);
+            while ($row=$result->fetch_assoc()) { 
+                if ($_POST['id_pemilik']==$row['id_pemilik'] && md5($_POST['password'])==$row['password']) {
+                    $_SESSION['id_pemilik']=$row['id_pemilik'];
+                    $_SESSION['pemilik']='pemilik';
+                    header("location: ".base_url('index.php/pemilik'));
+                    break;
+                } else{
+                    
+                }
+            }
+            if (empty($_SESSION['id_pemilik'])) {
+                echo "<script> alert('Username atau Password Salah'); </script>";
+                session_destroy();
+                header("location: ".base_url('index.php/Welcome/login_pemilik'));
+            }
+        }
+    }
+
+	public function login_pilihan(){
+		$this->load->view('home/login_pilihan');
+	}
+
+	public function regis_pilihan(){
+		$this->load->view('home/regis_pilihan');
+	}
+
+	 // Insert Pencari
+  public function insert_pencari(){
+    $target_dir   = "././asset_registrasi/upload_pencari/"; // Untuk Foto
+    $target_dir2   = "asset_registrasi/upload_pencari/"; // Untuk Foto
+    $file_name    = basename($_FILES["foto"]["name"]); // Untuk Foto
+    $target_file  = $target_dir . $file_name; // Untuk Foto
+    $target_file2  = $target_dir2 . $file_name; // Untuk Foto
+    $imageFileType  = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // untuk foto
+
+    if (move_uploaded_file($_FILES["foto"]["tmp_name"],$target_file)) {
+      if ($_POST['password']==$_POST['konfirmasi']) {
+        $id_pencari = $_POST['id_pencari'];
+        $password = md5($_POST['password']);
+        $nama_pencari = $_POST['nama_pencari'];
+        $instansi = $_POST['instansi'];
+        $tempat_lahir = $_POST['tempat_lahir'];
+        $tgl_lahir = $_POST['tgl_lahir'];
+        $asal_daerah = $_POST['asal_daerah'];
+        $no_ktp = $_POST['no_ktp'];
+        $status = $_POST['status'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        $email = $_POST['email'];
+        $no_telp = $_POST['no_telp'];
+        $no_telp_wali = $_POST['no_telp_wali'];
+        // $foto = $_FILES['foto'];
+        // if ($foto='') {
+        // } else{
+        //   $config['upload_path'] = './asset/upload_user';
+        //   $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        //   $this->load->library('upload',$config);
+        //   if (!$this->upload->do_opload('foto')) {
+        //     echo "<script> alert('Foto Gagal diunggah');</script>"; die();
+        //   } else{
+        //     $foto=$this->upload->data('file_name');
+        //   }
+        // }
+        $sql="INSERT INTO pencari VALUES ('$id_pencari', '$password', '$nama_pencari', '$instansi', '$tempat_lahir', '$tgl_lahir', '$asal_daerah', '$no_ktp', '$status', '$jenis_kelamin', '$email', '$no_telp', '$no_telp_wali', '$target_file2')";
+        $result=$this->conn->query($sql);
+        if ($result == true) {
+            echo "<script> alert('Akun Penghuni berhasil dibuat');</script>";
+        } else {
+            echo "<script> alert('Akun Penghuni gagal dibuat');</script>";
+        }
+        header("location: ".base_url('index.php/Welcome/login_pencari'));
+      } else {
+        echo "<script> alert('Pastikan Password & konfirmasi password sama');</script>";
+        header("location: ".base_url('index.php/Welcome/registrasi_pencari'));
+      }
+    } else {
+        echo "<script> alert('Foto Gagal diunggah');</script>";
+        header("location: ".base_url('index.php/Welcome/registrasi_pencari'));
+    }
+    mysqli_close($this->conn);
+   
+  }
+
+  // Insert Pemilik
+  public function insert_pemilik(){
+    $target_dir   = "././asset_registrasi/upload_pemilik/"; // Untuk Foto
+    $target_dir2   = "asset_registrasi/upload_pemilik/"; // Untuk Foto
+    $file_name    = basename($_FILES["foto"]["name"]); // Untuk Foto
+    $target_file  = $target_dir . $file_name; // Untuk Foto
+    $target_file2  = $target_dir2 . $file_name; // Untuk Foto
+    $imageFileType  = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // untuk foto
+
+    if (move_uploaded_file($_FILES["foto"]["tmp_name"],$target_file)) {
+      if ($_POST['password']==$_POST['konfirmasi']) {
+        $id_pemilik = $_POST['id_pemilik'];
+        $nama_pemilik = $_POST['nama_pemilik'];
+        $password = md5($_POST['password']);
+        $no_ktp = $_POST['no_ktp'];
+        $no_telp = $_POST['no_telp'];
+        $email = $_POST['email'];
+        $no_rek = $_POST['no_rek'];
+        $atas_nama_rek = $_POST['atas_nama_rek'];
+        $bank = $_POST['bank'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        $sql="INSERT INTO pemilik VALUES ('$id_pemilik', '$nama_pemilik', '$password', '$no_ktp', '$no_telp', '$email', '$no_rek', '$atas_nama_rek', '$bank', '$jenis_kelamin', '$target_file2')";
+        $result=$this->conn->query($sql);
+    
+        if ($result == true) {
+            echo "<script> alert('Akun Pemilik berhasil dibuat');</script>";
+        } else {
+            echo "<script> alert('Akun Pemilik gagal dibuat');</script>";
+        }
+        header("location: ".base_url('index.php/Welcome/login_pemilik'));
+
+      } else {
+        echo "<script> alert('Pastikan Password & konfirmasi password sama');</script>";
+        header("location: ".base_url('index.php/Welcome/registrasi_pemilik'));
+      }
+
+    } else {
+        echo "<script> alert('Foto Gagal diunggah');</script>";
+        header("location: ".base_url('index.php/Welcome/registrasi_pemilik'));
+    }
+    mysqli_close($this->conn);
+    
+  }
+  
+  // Insert Admin
+  public function insert_admin(){
+    $target_dir   = "././asset_registrasi/upload_admin/"; // Untuk Foto
+    $target_dir2   = "asset_registrasi/upload_admin/"; // Untuk Foto
+    $file_name    = basename($_FILES["foto"]["name"]); // Untuk Foto
+    $target_file  = $target_dir . $file_name; // Untuk Foto
+    $target_file2  = $target_dir2 . $file_name; // Untuk Foto
+    $imageFileType  = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // untuk foto
+
+    if (move_uploaded_file($_FILES["foto"]["tmp_name"],$target_file)) {
+      if ($_POST['password']==$_POST['konfirmasi']) {
+        $username = $_POST['username'];
+        $password = md5($_POST['password']);
+        $nama_admin = $_POST['nama_admin'];
+        $email = $_POST['email'];
+        $no_telp = $_POST['no_telp'];
+        $sql="INSERT INTO admin VALUES ('$username', '$password', '$nama_admin', '$email', '$no_telp', '$target_file2')";
+        $result=$this->conn->query($sql);
+        if ($result == true) {
+            echo "<script> alert('Akun Admin berhasil dibuat');</script>";
+        } else {
+            echo "<script> alert('Akun Admin gagal dibuat');</script>";
+        }
+        header("location: ".base_url('index.php/Welcome/login_admin'));
+
+      } else {
+        echo "<script> alert('Pastikan Password & konfirmasi password sama');</script>";
+        header("location: ".base_url('index.php/Welcome/registrasi_admin'));
+      }
+    } else {
+      echo "<script> alert('Foto Gagal diunggah');</script>";
+        header("location: ".base_url('index.php/Welcome/registrasi_admin'));
+    }
+    mysqli_close($this->conn);
+  }
+	
+}
