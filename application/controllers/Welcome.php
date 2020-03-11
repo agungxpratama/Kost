@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
@@ -19,17 +19,18 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-    private $conn;
+    // private $conn;
 	function __construct(){
 		parent::__construct();
-		$this->load->helper('url');
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$db = "kost";
-		$this->conn = mysqli_connect($servername, $username, $password, $db);
+		// $this->load->libraries('form_validation');
+
+        $this->load->model('M_All');
+
+		// $servername = "localhost";
+		// $username = "root";
+		// $password = "";
+		// $db = "kost";
+		// $this->conn = mysqli_connect($servername, $username, $password, $db);
 	}
 
 	public function index(){
@@ -77,54 +78,114 @@ class Welcome extends CI_Controller {
 
     public function proses_login(){
         if (isset($_GET['admin'])) {
-            $sql      = "SELECT * FROM admin;";
-            $result   = $this->conn->query($sql);
-            while ($row=$result->fetch_assoc()) { 
-                if ($_POST['username']==$row['username'] && md5($_POST['password'])==$row['password']) {
-                    $_SESSION['username']=$row['username'];
-                    $_SESSION['admin']='admin';
-                    header("location: ".base_url('index.php/admin'));
-                    break;
-                } else{
-                    
-                }
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            $where = array(
+                'username' => $username,
+                'password' => md5($password),
+            );
+
+            $cek = $this->M_All->view_where('admin', $where);
+
+            if ($cek > 0) {
+                $data_session = array(
+                    'username' => $username,
+                    'admin' => 'admin',
+                );
+
+                $this->session->set_userdata($data_session);
+                redirect(base_url('index.php/admin'));
             }
+            // $sql      = "SELECT * FROM 'admin';";
+            // $result   = $this->conn->query($sql);
+            // while ($row=$result->fetch_assoc()) {
+            //     if ($username==$row['username'] && md5($password)==$row['password']) {
+            //         $_SESSION['username']=$row['username'];
+            //         $_SESSION['admin']='admin';
+            //         header("location: ".base_url('index.php/admin'));
+            //         break;
+            //     } else{
+            //
+            //     }
+            // }
             if (empty($_SESSION['username'])) {
                     echo "<script> alert('Username atau Password Salah'); </script>";
                 session_destroy();
                     header("location: ".base_url('index.php/Welcome/login_admin'));
             }
-        } elseif (isset($_GET['pencari'])) {
-            $sql      = "SELECT * FROM pencari;";
-            $result   = $this->conn->query($sql);
-            while ($row=$result->fetch_assoc()) { 
-                if ($_POST['id_pencari']==$row['id_pencari'] && md5($_POST['password'])==$row['password']) {
-                    $_SESSION['id_pencari']=$row['id_pencari'];
-                    $_SESSION['pencari']='pencari';
-                    header("location: ".base_url('index.php/pencari'));
-                    break;
-                } else{
-                    
-                }
+        }
+        elseif (isset($_GET['pencari'])) {
+            $id_pencari = $this->input->post('id_pencari');
+            $password = $this->input->post('password');
+
+            $where = array(
+                'id_pencari' => $id_pencari,
+                'password' => md5($password),
+            );
+
+            $cek = $this->M_All->view_where('pencari', $where);
+
+            if ($cek > 0) {
+                $data_session = array(
+                    'id_pencari' => $id_pencari,
+                    'pencari' => 'pencari',
+                );
+
+                $this->session->set_userdata($data_session);
+                redirect(base_url('index.php/pencari'));
             }
+
+            // $sql      = "SELECT * FROM pencari;";
+            // $result   = $this->conn->query($sql);
+            // while ($row=$result->fetch_assoc()) {
+            //     if ($_POST['id_pencari']==$row['id_pencari'] && md5($_POST['password'])==$row['password']) {
+            //         $_SESSION['id_pencari']=$row['id_pencari'];
+            //         $_SESSION['pencari']='pencari';
+            //         header("location: ".base_url('index.php/pencari'));
+            //         break;
+            //     } else{
+            //
+            //     }
+            // }
             if (empty($_SESSION['id_pencari'])) {
                 echo "<script> alert('Username atau Password Salah'); </script>";
                 session_destroy();
                 header("location: ".base_url('index.php/Welcome/login_pencari'));
             }
         } elseif (isset($_GET['pemilik'])) {
-            $sql      = "SELECT * FROM pemilik;";
-            $result   = $this->conn->query($sql);
-            while ($row=$result->fetch_assoc()) { 
-                if ($_POST['id_pemilik']==$row['id_pemilik'] && md5($_POST['password'])==$row['password']) {
-                    $_SESSION['id_pemilik']=$row['id_pemilik'];
-                    $_SESSION['pemilik']='pemilik';
-                    header("location: ".base_url('index.php/pemilik'));
-                    break;
-                } else{
-                    
-                }
+            $id_pemilik = $this->input->post('id_pemilik');
+            $password = $this->input->post('password');
+
+            $where = array(
+                'id_pemilik' => $id_pemilik,
+                'password' => md5($password),
+            );
+
+            $cek = $this->M_All->view_where('pemilik', $where);
+
+            if ($cek > 0) {
+                $data_session = array(
+                    'id_pemilik' => $id_pemilik,
+                    'pemilik' => 'pemilik',
+                );
+
+                $this->session->set_userdata($data_session);
+                redirect(base_url('index.php/pemilik'));
             }
+
+            // $sql      = "SELECT * FROM pemilik;";
+            // $result   = $this->conn->query($sql);
+            // while ($row=$result->fetch_assoc()) {
+            //     if ($_POST['id_pemilik']==$row['id_pemilik'] && md5($_POST['password'])==$row['password']) {
+            //         $_SESSION['id_pemilik']=$row['id_pemilik'];
+            //         $_SESSION['pemilik']='pemilik';
+            //         header("location: ".base_url('index.php/pemilik'));
+            //         break;
+            //     } else{
+            //
+            //     }
+            // }
             if (empty($_SESSION['id_pemilik'])) {
                 echo "<script> alert('Username atau Password Salah'); </script>";
                 session_destroy();
@@ -194,7 +255,7 @@ class Welcome extends CI_Controller {
         header("location: ".base_url('index.php/Welcome/registrasi_pencari'));
     }
     mysqli_close($this->conn);
-   
+
   }
 
   // Insert Pemilik
@@ -220,7 +281,7 @@ class Welcome extends CI_Controller {
         $jenis_kelamin = $_POST['jenis_kelamin'];
         $sql="INSERT INTO pemilik VALUES ('$id_pemilik', '$nama_pemilik', '$password', '$no_ktp', '$no_telp', '$email', '$no_rek', '$atas_nama_rek', '$bank', '$jenis_kelamin', '$target_file2')";
         $result=$this->conn->query($sql);
-    
+
         if ($result == true) {
             echo "<script> alert('Akun Pemilik berhasil dibuat');</script>";
         } else {
@@ -238,9 +299,9 @@ class Welcome extends CI_Controller {
         header("location: ".base_url('index.php/Welcome/registrasi_pemilik'));
     }
     mysqli_close($this->conn);
-    
+
   }
-  
+
   // Insert Admin
   public function insert_admin(){
     $target_dir   = "././asset_registrasi/upload_admin/"; // Untuk Foto
@@ -276,5 +337,10 @@ class Welcome extends CI_Controller {
     }
     mysqli_close($this->conn);
   }
-	
+
+  function Logout(){
+      $this->session->sess_destroy();
+      redirect(base_url('index.php/welcome'));
+  }
+
 }

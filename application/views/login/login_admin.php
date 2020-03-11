@@ -3,7 +3,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 				<center><img src="<?php echo base_url() ?>asset_home/img/logo2.png" width="100px" height="100px" alt="" ></center> <br>
-				<form class="login100-form validate-form" action="<?php echo base_url('index.php/Welcome/proses_login?admin'); ?>" method="POST">
+				<form class="login100-form validate-form" action="<?php echo base_url('index.php/Welcome/proses_login?admin'); ?>" method="post">
 					<span class="login100-form-title p-b-55">
 						Login Admin Kos
 					</span>
@@ -27,7 +27,7 @@
 							Remember me
 						</label>
 					</div>
-					
+
 					<div class="container-login100-form-btn p-t-25">
 						<button type="submit" name="submit" class="login100-form-btn" style="background-color: #5F9EA0;">
 							Login
@@ -40,12 +40,10 @@
 						</span>
 
 						<a class="txt1 bo1 hov1" href="<?php echo base_url('index.php/Welcome/registrasi_admin'); ?>">
-							Daftar Sekarang							
+							Daftar Sekarang
 						</a>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
-	

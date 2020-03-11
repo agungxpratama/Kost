@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -7,14 +7,14 @@ class Pemilik extends CI_Controller{
 	private $conn;
 	function __construct(){
 		parent::__construct();
-		$this->load->helper('url');
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$db = "kost";
-		$this->conn = mysqli_connect($servername,$username, $password, $db);
+		// $this->load->helper('url');
+		// $this->load->helper('form');
+		// $this->load->library('form_validation');
+		// $servername = "localhost";
+		// $username = "root";
+		// $password = "";
+		// $db = "kost";
+		// $this->conn = mysqli_connect($servername,$username, $password, $db);
 	}
 
 	public function index(){
@@ -34,7 +34,7 @@ class Pemilik extends CI_Controller{
 		if (empty($_SESSION['pemilik'])) {
   		header("location: ".base_url());
 		} else{
-		
+
 			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
             $data['nama']   = $this->conn->query($sql);
 			$this->load->view('pemilik/sidebar_pemilik');
@@ -98,7 +98,7 @@ class Pemilik extends CI_Controller{
 	}
 	public function logout(){
 		session_destroy();
-		header("location: ".base_url());	
+		header("location: ".base_url());
 	}
 
 	public function input_data_kos(){

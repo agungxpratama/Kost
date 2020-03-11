@@ -1,5 +1,5 @@
 <body>
-	
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
@@ -28,7 +28,7 @@
 							Remember me
 						</label>
 					</div>
-					
+
 					<div class="container-login100-form-btn p-t-25">
 						<button type="submit" name="submit" class="login100-form-btn" style="background-color: #5F9EA0;">
 							Login
@@ -41,12 +41,10 @@
 						</span>
 
 						<a class="txt1 bo1 hov1" href="<?php echo base_url('index.php/Welcome/registrasi_pemilik'); ?>">
-							Daftar Sekarang							
+							Daftar Sekarang
 						</a>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	
-	

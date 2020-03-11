@@ -1,9 +1,9 @@
 <?php
-session_start();
+// session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller{
-	private $conn;
+	// private $conn;
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
@@ -31,7 +31,7 @@ class Admin extends CI_Controller{
 
 	public function logout(){
 		session_destroy();
-		header("location: ".base_url());	
+		header("location: ".base_url());
 	}
 
 	public function data_penghuni(){
@@ -102,6 +102,6 @@ class Admin extends CI_Controller{
 	}
 
 
-	
+
 
 }

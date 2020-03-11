@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pencari extends CI_Controller{
@@ -33,7 +33,7 @@ class Pencari extends CI_Controller{
 
 	public function logout(){
 		session_destroy();
-		header("location: ".base_url());	
+		header("location: ".base_url());
 	}
 
 	public function pencarian(){
@@ -43,6 +43,6 @@ class Pencari extends CI_Controller{
 	$this->load->view('pencari/footer_pencari');
 	}
 
-	
+
 
 }
