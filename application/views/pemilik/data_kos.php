@@ -22,27 +22,24 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                    while ($row=$result->fetch_assoc()) { ?>
-                      <tr>
-                        <td><?php echo $row['kode_kos']; ?></td>
-                        <td><?php echo $row['nama_kos']; ?></td>
-                        <td><?php echo $row['alamat']; ?></td>
-                        <td><?php echo $row['deskripsi']; ?></td>
-                        <td><?php echo $row['foto']; ?></td>
-                        <td><?php echo $row['jenis_kosan']; ?></td>
-                        <td><?php echo $row['saldo_kos']; ?></td>
-                        <td><?php echo $row['id_pemilik']; ?></td>
-                        <td>
-                          <a href="<?php echo base_url("index.php/Admin/hapus_kos?kode_kos=$row[kode_kos];") ?>" class="btn btn-primary">Hapus</a>
-                          <a href="<?php echo base_url("index.php/Admin/edit_kos?kode_kos=$row[kode_kos];") ?>" class="btn btn-danger">Edit</a>
-                        </td>
-                      </tr>
-                      <?php
-                    }
-                     ?>
+                    <?php foreach ($result as $r): ?>
+                        <tr>
+                            <td><?= $r->kode_kos;?></td>
+                            <td><?= $r->nama_kos; ?></td>
+                            <td><?= $r->alamat; ?></td>
+                            <td><?= $r->deskripsi; ?></td>
+                            <td><?= $r->foto; ?></td>
+                            <td><?= $r->jenis_kosan; ?></td>
+                            <td><?= $r->saldo_kos; ?></td>
+                            <td><?= $r->id_pemilik; ?></td>
+                            <td>
+                                <a href="<?php echo base_url("index.php/Admin/hapus_kos?kode_kos= $r->kode_kos;") ?>" class="btn btn-primary">Hapus</a>
+                                <a href="<?php echo base_url("index.php/Admin/edit_kos?kode_kos= $r->kode_kos;") ?>" class="btn btn-danger">Edit</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                   </tbody>
-                  
+
                 </table>
               </div>
             </div>

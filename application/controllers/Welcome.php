@@ -226,18 +226,18 @@ class Welcome extends CI_Controller {
         $email = $_POST['email'];
         $no_telp = $_POST['no_telp'];
         $no_telp_wali = $_POST['no_telp_wali'];
-        // $foto = $_FILES['foto'];
-        // if ($foto='') {
-        // } else{
-        //   $config['upload_path'] = './asset/upload_user';
-        //   $config['allowed_types'] = 'jpg|jpeg|png|gif';
-        //   $this->load->library('upload',$config);
-        //   if (!$this->upload->do_opload('foto')) {
-        //     echo "<script> alert('Foto Gagal diunggah');</script>"; die();
-        //   } else{
-        //     $foto=$this->upload->data('file_name');
-        //   }
-        // }
+        $foto = $_FILES['foto'];
+        if ($foto='') {
+        } else{
+          $config['upload_path'] = './asset/upload_user';
+          $config['allowed_types'] = 'jpg|jpeg|png|gif';
+          $this->load->library('upload',$config);
+          if (!$this->upload->do_opload('foto')) {
+            echo "<script> alert('Foto Gagal diunggah');</script>"; die();
+          } else{
+            $foto=$this->upload->data('file_name');
+          }
+        }
         $sql="INSERT INTO pencari VALUES ('$id_pencari', '$password', '$nama_pencari', '$instansi', '$tempat_lahir', '$tgl_lahir', '$asal_daerah', '$no_ktp', '$status', '$jenis_kelamin', '$email', '$no_telp', '$no_telp_wali', '$target_file2')";
         $result=$this->conn->query($sql);
         if ($result == true) {

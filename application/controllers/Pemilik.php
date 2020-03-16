@@ -4,9 +4,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pemilik extends CI_Controller{
-	private $conn;
+	// private $conn;
 	function __construct(){
 		parent::__construct();
+		$this->load->model('M_All');
+		if ($this->session->userdata('pemilik') != "pemilik") {
+			redirect(base_url('index.php'));
+		}
+
 		// $this->load->helper('url');
 		// $this->load->helper('form');
 		// $this->load->library('form_validation');
@@ -18,101 +23,133 @@ class Pemilik extends CI_Controller{
 	}
 
 	public function index(){
-		if (empty($_SESSION['pemilik'])) {
-  		header("location: ".base_url());
-		} else{
-			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
-            $data['nama']   = $this->conn->query($sql);
-			$this->load->view('pemilik/sidebar_pemilik');
-			$this->load->view('pemilik/header_pemilik', $data);
-			$this->load->view('pemilik/dashboard');
-			$this->load->view('pemilik/foot_pemilik');
-		}
+		// if (empty($_SESSION['pemilik'])) {
+  		// header("location: ".base_url());
+		// } else{
+			// $sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
+            // $data['nama']   = $this->conn->query($sql);
+		$id_pemilik = $this->session->userdata('id_pemilik');
+		$where = array('id_pemilik' => $id_pemilik);
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		$this->load->view('pemilik/dashboard');
+		$this->load->view('pemilik/foot_pemilik');
+		// }
 	}
 
 	public function booking(){
-		if (empty($_SESSION['pemilik'])) {
-  		header("location: ".base_url());
-		} else{
-
-			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
-            $data['nama']   = $this->conn->query($sql);
-			$this->load->view('pemilik/sidebar_pemilik');
-			$this->load->view('pemilik/header_pemilik', $data);
-			$this->load->view('pemilik/booking');
-			$this->load->view('pemilik/foot_pemilik');
-		}
+		// if (empty($_SESSION['pemilik'])) {
+  		// header("location: ".base_url());
+		// } else{
+			//
+			// $sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
+            // $data['nama']   = $this->conn->query($sql);
+		$id_pemilik = $this->session->userdata('id_pemilik');
+		$where = array('id_pemilik' => $id_pemilik);
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		$this->load->view('pemilik/booking');
+		$this->load->view('pemilik/foot_pemilik');
+		// }
 	}
 
 	public function data_tamu(){
-		if (empty($_SESSION['pemilik'])) {
-  		header("location: ".base_url());
-		} else{
-			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
-            $data['nama']   = $this->conn->query($sql);
-			$this->load->view('pemilik/sidebar_pemilik');
-			$this->load->view('pemilik/header_pemilik', $data);
-			$this->load->view('pemilik/data_tamu');
-			$this->load->view('pemilik/foot_pemilik');
-		}
+		// if (empty($_SESSION['pemilik'])) {
+  		// header("location: ".base_url());
+		// } else{
+		// 	$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
+        //     $data['nama']   = $this->conn->query($sql);
+		$id_pemilik = $this->session->userdata('id_pemilik');
+		$where = array('id_pemilik' => $id_pemilik);
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		$this->load->view('pemilik/data_tamu');
+		$this->load->view('pemilik/foot_pemilik');
+		// }
 	}
 
 	public function pemasukan(){
-		if (empty($_SESSION['pemilik'])) {
-  		header("location: ".base_url());
-		} else{
-			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
-            $data['nama']   = $this->conn->query($sql);
-			$this->load->view('pemilik/sidebar_pemilik');
-			$this->load->view('pemilik/header_pemilik', $data);
-			$this->load->view('pemilik/pemasukan');
-			$this->load->view('pemilik/foot_pemilik');
-		}
+		// if (empty($_SESSION['pemilik'])) {
+  		// header("location: ".base_url());
+		// } else{
+		// 	$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
+        //     $data['nama']   = $this->conn->query($sql);
+		$id_pemilik = $this->session->userdata('id_pemilik');
+		$where = array('id_pemilik' => $id_pemilik);
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		$this->load->view('pemilik/pemasukan');
+		$this->load->view('pemilik/foot_pemilik');
+		// }
 	}
 
 	public function pengeluaran(){
-		if (empty($_SESSION['pemilik'])) {
-  		header("location: ".base_url());
-		} else{
-			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
-            $data['nama']   = $this->conn->query($sql);
-			$this->load->view('pemilik/sidebar_pemilik');
-			$this->load->view('pemilik/header_pemilik', $data);
-			$this->load->view('pemilik/pengeluaran');
-			$this->load->view('pemilik/foot_pemilik');
-		}
+		// if (empty($_SESSION['pemilik'])) {
+  		// header("location: ".base_url());
+		// } else{
+		// 	$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
+        //     $data['nama']   = $this->conn->query($sql);
+
+		$id_pemilik = $this->session->userdata('id_pemilik');
+		$where = array('id_pemilik' => $id_pemilik);
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		$this->load->view('pemilik/pengeluaran');
+		$this->load->view('pemilik/foot_pemilik');
+		// }
 	}
 	public function view_data_kos(){
-		if (empty($_SESSION['pemilik'])) {
-  		header("location: ".base_url());
-		} else{
-			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
-            $data['nama']   = $this->conn->query($sql);
-			$sql="SELECT * FROM kosan WHERE id_pemilik='$_SESSION[id_pemilik]'";
-			$data['result']=$this->conn->query($sql);
+		// if (empty($_SESSION['pemilik'])) {
+  		// header("location: ".base_url());
+		// } else{
+			// $sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
+            // $data['nama']   = $this->conn->query($sql);
+
+			$id_pemilik = $this->session->userdata('id_pemilik');
+			$where = array('id_pemilik' => $id_pemilik);
+			$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+
+			// $sql="SELECT * FROM kosan WHERE id_pemilik='$_SESSION[id_pemilik]'";
+			// $data['result']=$this->conn->query($sql);
+
+			$data['result'] = $this->M_All->get('kosan')->result();
 			$this->load->view('pemilik/sidebar_pemilik');
 			$this->load->view('pemilik/header_pemilik',$data);
 			$this->load->view('pemilik/data_kos', $data);
 			$this->load->view('pemilik/foot_pemilik');
-		}
+		// }
 	}
 	public function logout(){
 		session_destroy();
 		header("location: ".base_url());
 	}
 
+	function Logoutt(){
+        $this->session->sess_destroy();
+        redirect(base_url('index.php/welcome'));
+    }
+
 	public function input_data_kos(){
-		if (empty($_SESSION['pemilik'])) {
-  		header("location: ".base_url());
-		} else{
-			$sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
-            $data['nama']   = $this->conn->query($sql);
+		// if (empty($_SESSION['pemilik'])) {
+  		// header("location: ".base_url());
+		// } else{
+			// $sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
+            // $data['nama']   = $this->conn->query($sql);
+			$id_pemilik = $this->session->userdata('id_pemilik');
+			$where = array('id_pemilik' => $id_pemilik);
+			$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
 			$this->load->view('pemilik/sidebar_pemilik');
 			$this->load->view('pemilik/header_pemilik', $data);
 			$this->load->view('pemilik/input_data_kos');
 			$this->load->view('pemilik/foot_pemilik');
-		}
+		// }
 	}
+
 	public function insert_data_kos(){
 		$target_dir   = "././asset_admin/upload_kos/"; // Untuk Foto
 	    $target_dir2   = "asset_admin/upload_kos/"; // Untuk Foto

@@ -18,10 +18,12 @@
                       <th>Tanggal Diubah</th>
                       <th>Gambar Artikel</th>
                       <th>Aksi</th>
-
                     </tr>
                   </thead>
-                  
+                  <tbody>
+                      
+                  </tbody>
+
                 </table>
               </div>
             </div>
