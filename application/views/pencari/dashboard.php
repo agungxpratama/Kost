@@ -11,27 +11,31 @@
                   <thead>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="card-columns">
-                        <?php 
-                        while ($row=$result->fetch_assoc()) { ?>
-                        <div class="card">
-                          <img class="card-img-top" src="<?php echo base_url($row['foto']); ?>" alt="Card image cap">
-                          <div class="card-body">
-                            <h3 class="card-title"><?php echo $row['nama_kos']; ?></h3>
-                            <p class="card-text">
-                              <?php echo $row['deskripsi']; ?><br>
-                              Alamat : <?php echo $row['alamat']; ?>
-                            </p>
-                            <button class="btn btn-success">Pesan</button>
-                            <button class="btn btn-warning">Hubungi</button>
-                          </div>
-                        </div>
-                        <?php } 
+                        <?php
+                        // while ($row=$result->fetch_assoc()) {
+                            ?>
+                        <?php foreach ($result as $r): ?>
+                            <div class="card">
+                                <img class="card-img-top" src="<?php echo base_url('asset_admin/upload_kos/'.$r->foto); ?>" alt="Card image cap">
+                                <div class="card-body">
+                                    <h3 class="card-title"><?php echo $r->nama_kos; ?></h3>
+                                    <p class="card-text">
+                                        <?php echo $r->deskripsi; ?><br>
+                                        Alamat : <?php echo $r->alamat; ?>
+                                    </p>
+                                    <button class="btn btn-success">Pesan</button>
+                                    <button class="btn btn-warning">Hubungi</button>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                        <?php
+                    // }
                          ?>
                       </div>
                     </div>
                   </thead>
                   <tfoot>
-                  
+
                   </tbody>
                 </table>
               </div>
