@@ -34,7 +34,8 @@ class Pencari extends CI_Controller{
 
 			// $sql      		= "SELECT * FROM kosan";
             // $data['result']   = $this->conn->query($sql);
-		$data['result'] = $this->M_All->get('kosan')->result();
+			// $data['result'] = $this->M_All->get('kosan')->result();
+		$data['result'] = $this->M_All->join('pemilik','kosan')->result();
 
 		$this->load->view('pencari/sidebar_pencari');
 		$this->load->view('pencari/header_pencari', $data);
@@ -49,10 +50,10 @@ class Pencari extends CI_Controller{
 	}
 
 	public function pencarian(){
-	$this->load->view('pencari/sidebar_pencari');
-	$this->load->view('pencari/header_pencari');
-	$this->load->view('pencari/pencarian');
-	$this->load->view('pencari/footer_pencari');
+		$this->load->view('pencari/sidebar_pencari');
+		$this->load->view('pencari/header_pencari');
+		$this->load->view('pencari/pencarian');
+		$this->load->view('pencari/footer_pencari');
 	}
 
 

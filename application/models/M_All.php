@@ -33,14 +33,14 @@ class M_All extends CI_Model{
         return $this->db->get_where($table,$where);
     }
 
-    // function join_cart($from, $at)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from($from);
-    //     $this->db->join($at, 'cart.id_barang = barang.id_barang');
-    //     return $this->db->get();
-    // }
-    //
+    function join($from, $at)
+    {
+        $this->db->select('*');
+        $this->db->from($from);
+        $this->db->join($at, 'pemilik.id_pemilik = kosan.id_pemilik');
+        return $this->db->get();
+    }
+
     // function join_wishlist($from, $at)
     // {
     //     $this->db->select('*');

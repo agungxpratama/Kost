@@ -23,8 +23,8 @@
                                         <?php echo $r->deskripsi; ?><br>
                                         Alamat : <?php echo $r->alamat; ?>
                                     </p>
-                                    <button class="btn btn-success">Pesan</button>
-                                    <button class="btn btn-warning">Hubungi</button>
+                                    <a href="" class="btn btn-success">Pesan</a>
+                                    <a href="https://wa.me/<?= $r->no_telp?>" class="btn btn-warning">Hubungi</a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
