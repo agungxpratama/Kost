@@ -323,7 +323,59 @@ class Welcome extends CI_Controller {
 
 	// Insert Pemilik
 	public function insert_pemilik(){
-		
+		$config['upload_path']          = './asset_registrasi/upload_pemilik/';
+		$config['overwrite']        = true;
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 1024;
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('foto')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('upload_form', $error);
+			echo "<script> alert('Foto Gagal diunggah');</script>";
+        }
+        else{
+            $data = array('upload_data' => $this->upload->data());
+            // $this->load->view('upload_success', $data);
+			if ($this->input->post('konfirmasi') == $this->input->post('password')) {
+				$id_pemilik = $this->input->post('id_pemilik');
+				$password = md5($this->input->post('password'));
+				$nama_pemilik = $this->input->post('nama_pemilik');
+				$no_ktp = $this->input->post('no_ktp');
+				$no_telp = $this->input->post('no_telp');
+				$no_rek = $this->input->post('no_rek');
+				$atas_nama_rek = $this->input->post('atas_nama_rek');
+				$email = $this->input->post('email');
+				$jenis_kelamin = $this->input->post('jenis_kelamin');
+				$foto = $this->upload->data('file_name');
+
+				$data = array(
+					'id_pemilik' => $id_pemilik,
+					'password' => $password,
+					'nama_pemilik' => $nama_pemilik,
+					'no_ktp' => $no_ktp,
+					'no_telp' => $no_telp,
+					'no_rek' => $no_rek,
+					'atas_nama_rek' => $atas_nama_rek,
+					'email' => $email,
+					'jenis_kelamin' => $jenis_kelamin,
+					'foto' => $foto,
+				);
+				if ($this->M_All->insert('pemilik', $data) != true) {
+					redirect('index.php/welcome/login_pemilik');
+					echo "<script> alert('Akun Pemilik berhasil dibuat');</script>";
+				}else{
+					redirect('index.php/welcome/registrasi_pemilik');
+					echo "<script> alert('Akun Pemilik gagal dibuat');</script>";
+				}
+			} else {
+				echo "<script> alert('Pastikan Password & konfirmasi password sama');</script>";
+				redirect('Welcome/registrasi_pemilik');
+			}
+        }
 		// $target_dir   = "././asset_registrasi/upload_pemilik/"; // Untuk Foto
 	    // $target_dir2   = "asset_registrasi/upload_pemilik/"; // Untuk Foto
 	    // $file_name    = basename($_FILES["foto"]["name"]); // Untuk Foto
@@ -333,18 +385,18 @@ class Welcome extends CI_Controller {
 		//
 	    // if (move_uploaded_file($_FILES["foto"]["tmp_name"],$target_file)) {
 	    //   if ($_POST['password']==$_POST['konfirmasi']) {
-	    //     $id_pemilik = $_POST['id_pemilik'];
-	    //     $nama_pemilik = $_POST['nama_pemilik'];
-	    //     $password = md5($_POST['password']);
-	    //     $no_ktp = $_POST['no_ktp'];
-	    //     $no_telp = $_POST['no_telp'];
-	    //     $email = $_POST['email'];
-	    //     $no_rek = $_POST['no_rek'];
-	    //     $atas_nama_rek = $_POST['atas_nama_rek'];
-	    //     $bank = $_POST['bank'];
-	    //     $jenis_kelamin = $_POST['jenis_kelamin'];
-	    //     $sql="INSERT INTO pemilik VALUES ('$id_pemilik', '$nama_pemilik', '$password', '$no_ktp', '$no_telp', '$email', '$no_rek', '$atas_nama_rek', '$bank', '$jenis_kelamin', '$target_file2')";
-	    //     $result=$this->conn->query($sql);
+	        // $id_pemilik = $_POST['id_pemilik'];
+	        // $nama_pemilik = $_POST['nama_pemilik'];
+	        // $password = md5($_POST['password']);
+	        // $no_ktp = $_POST['no_ktp'];
+	        // $no_telp = $_POST['no_telp'];
+	        // $email = $_POST['email'];
+	        // $no_rek = $_POST['no_rek'];
+	        // $atas_nama_rek = $_POST['atas_nama_rek'];
+	        // $bank = $_POST['bank'];
+	        // $jenis_kelamin = $_POST['jenis_kelamin'];
+	        // $sql="INSERT INTO pemilik VALUES ('$id_pemilik', '$nama_pemilik', '$password', '$no_ktp', '$no_telp', '$email', '$no_rek', '$atas_nama_rek', '$bank', '$jenis_kelamin', '$target_file2')";
+	        // $result=$this->conn->query($sql);
 		//
 	    //     if ($result == true) {
 	    //         echo "<script> alert('Akun Pemilik berhasil dibuat');</script>";
@@ -367,38 +419,84 @@ class Welcome extends CI_Controller {
 
 	// Insert Admin
 	public function insert_admin(){
-	    $target_dir   = "././asset_registrasi/upload_admin/"; // Untuk Foto
-	    $target_dir2   = "asset_registrasi/upload_admin/"; // Untuk Foto
-	    $file_name    = basename($_FILES["foto"]["name"]); // Untuk Foto
-	    $target_file  = $target_dir . $file_name; // Untuk Foto
-	    $target_file2  = $target_dir2 . $file_name; // Untuk Foto
-	    $imageFileType  = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // untuk foto
+		$config['upload_path']          = './asset_registrasi/upload_admin/';
+		$config['overwrite']        = true;
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 1024;
+        // $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
 
-	    if (move_uploaded_file($_FILES["foto"]["tmp_name"],$target_file)) {
-	      if ($_POST['password']==$_POST['konfirmasi']) {
-	        $username = $_POST['username'];
-	        $password = md5($_POST['password']);
-	        $nama_admin = $_POST['nama_admin'];
-	        $email = $_POST['email'];
-	        $no_telp = $_POST['no_telp'];
-	        $sql="INSERT INTO admin VALUES ('$username', '$password', '$nama_admin', '$email', '$no_telp', '$target_file2')";
-	        $result=$this->conn->query($sql);
-	        if ($result == true) {
-	            echo "<script> alert('Akun Admin berhasil dibuat');</script>";
-	        } else {
-	            echo "<script> alert('Akun Admin gagal dibuat');</script>";
-	        }
-	        header("location: ".base_url('index.php/Welcome/login_admin'));
+        $this->load->library('upload', $config);
 
-	      } else {
-	        echo "<script> alert('Pastikan Password & konfirmasi password sama');</script>";
-	        header("location: ".base_url('index.php/Welcome/registrasi_admin'));
-	      }
-	    } else {
-	      echo "<script> alert('Foto Gagal diunggah');</script>";
-	        header("location: ".base_url('index.php/Welcome/registrasi_admin'));
-	    }
-	    mysqli_close($this->conn);
+        if ( ! $this->upload->do_upload('foto')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('upload_form', $error);
+			echo "<script> alert('Foto Gagal diunggah');</script>";
+        }
+        else{
+            $data = array('upload_data' => $this->upload->data());
+            // $this->load->view('upload_success', $data);
+			if ($this->input->post('konfirmasi') == $this->input->post('password')) {
+				$username = $this->input->post('username');
+				$password = md5($this->input->post('password'));
+				$nama_admin = $this->input->post('nama_admin');
+				$no_telp = $this->input->post('no_telp');
+				$email = $this->input->post('email');
+				$foto = $this->upload->data('file_name');
+
+				$data = array(
+					'username' => $username,
+					'password' => $password,
+					'nama_admin' => $nama_admin,
+					'no_telp' => $no_telp,
+					'email' => $email,
+					'foto' => $foto,
+				);
+				if ($this->M_All->insert('admin', $data) != true) {
+					redirect('index.php/welcome/login_admin');
+					echo "<script> alert('Akun Admin berhasil dibuat');</script>";
+				}else{
+					redirect('index.php/welcome/registrasi_admin');
+					echo "<script> alert('Akun Admin gagal dibuat');</script>";
+				}
+			} else {
+				echo "<script> alert('Pastikan Password & konfirmasi password sama');</script>";
+				redirect('Welcome/registrasi_admin');
+			}
+        }
+
+		// $target_dir   = "././asset_registrasi/upload_admin/"; // Untuk Foto
+	    // $target_dir2   = "asset_registrasi/upload_admin/"; // Untuk Foto
+	    // $file_name    = basename($_FILES["foto"]["name"]); // Untuk Foto
+	    // $target_file  = $target_dir . $file_name; // Untuk Foto
+	    // $target_file2  = $target_dir2 . $file_name; // Untuk Foto
+	    // $imageFileType  = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // untuk foto
+		//
+	    // if (move_uploaded_file($_FILES["foto"]["tmp_name"],$target_file)) {
+	    //   if ($_POST['password']==$_POST['konfirmasi']) {
+	    //     $username = $_POST['username'];
+	    //     $password = md5($_POST['password']);
+	    //     $nama_admin = $_POST['nama_admin'];
+	    //     $email = $_POST['email'];
+	    //     $no_telp = $_POST['no_telp'];
+	    //     $sql="INSERT INTO admin VALUES ('$username', '$password', '$nama_admin', '$email', '$no_telp', '$target_file2')";
+	    //     $result=$this->conn->query($sql);
+	    //     if ($result == true) {
+	    //         echo "<script> alert('Akun Admin berhasil dibuat');</script>";
+	    //     } else {
+	    //         echo "<script> alert('Akun Admin gagal dibuat');</script>";
+	    //     }
+	    //     header("location: ".base_url('index.php/Welcome/login_admin'));
+		//
+	    //   } else {
+	    //     echo "<script> alert('Pastikan Password & konfirmasi password sama');</script>";
+	    //     header("location: ".base_url('index.php/Welcome/registrasi_admin'));
+	    //   }
+	    // } else {
+	    //   echo "<script> alert('Foto Gagal diunggah');</script>";
+	    //     header("location: ".base_url('index.php/Welcome/registrasi_admin'));
+	    // }
+	    // mysqli_close($this->conn);
 	}
 
 	function Logout(){
