@@ -300,7 +300,7 @@ class Pemilik extends CI_Controller{
 				'status' => $status,
 				'foto' => $foto,
 				'tgl_tersedia' => $tanggal_tersedia,
-				'id_pemilik' => $this->session->userdata('id_pemilik'),
+				
 			);
 			if ($this->M_All->insert('kamar', $data) != true) {
 				redirect('index.php/pemilik/');
