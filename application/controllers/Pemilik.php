@@ -252,6 +252,9 @@ class Pemilik extends CI_Controller{
 
 	public function edit_kos($id)
 	{
+		$newdat = array(
+			'kode_kos' => $id);
+		$this->session->set_userdata($newdat);
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$where_ = array('kode_kos' => $id);
@@ -283,19 +286,20 @@ class Pemilik extends CI_Controller{
             $data = array('upload_data' => $this->upload->data());
             // $this->load->view('upload_success', $data);
 			$kode_kamar = $this->input->post('kode_kamar');
-			$alamat = $this->input->post('harga');
-			$jenis_kosan = $this->input->post('status');
-			$deskripsi = $this->input->post('tgl_tersedia');
+			$harga = $this->input->post('harga');
+			$deskripsi = $this->input->post('deskripsi');
+			$status = $this->input->post('status');
+			$tanggal_tersedia = $this->input->post('tgl_tersedia');
 			$foto = $this->upload->data('file_name');
 
 			$data = array(
 				'kode_kamar' => $kode_kamar,
-				'nama_kos' => $nama_kos,
-				'alamat' => $alamat,
+				'kode_kos' => $this->session->userdata('kode_kos'),
+				'harga' => $harga,
 				'deskripsi' => $deskripsi,
+				'status' => $status,
 				'foto' => $foto,
-				'jenis_kosan' => $jenis_kosan,
-				'saldo_kos' => 0,
+				'tgl_tersedia' => $tanggal_tersedia,
 				'id_pemilik' => $this->session->userdata('id_pemilik'),
 			);
 			if ($this->M_All->insert('kamar', $data) != true) {
