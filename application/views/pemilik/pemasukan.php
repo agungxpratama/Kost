@@ -7,6 +7,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
+                  <!-- <?php print_r($result) ?> -->
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -18,8 +19,20 @@
                       <th>Keterangan</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                  
+                  <tbody>
+                      <?php
+                      $no = 0;
+                      foreach ($result as $r):
+                          $no++?>
+                          <tr>
+                              <td><?= $no ?></td>
+                              <td><?= $no ?></td>
+                              <td><?= $r->total_bayar ?></td>
+                              <td><?= $r->tgl_bayar ?></td>
+                              <td><?= $r->status ?></td>
+                              <td></td>
+                          </tr>
+                      <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>

@@ -48,9 +48,10 @@ class Pemilik extends CI_Controller{
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari')->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
-		$this->load->view('pemilik/booking');
+		$this->load->view('pemilik/booking', $data);
 		$this->load->view('pemilik/foot_pemilik');
 		// }
 	}
@@ -64,9 +65,10 @@ class Pemilik extends CI_Controller{
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari')->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
-		$this->load->view('pemilik/data_tamu');
+		$this->load->view('pemilik/data_tamu', $data);
 		$this->load->view('pemilik/foot_pemilik');
 		// }
 	}
@@ -80,9 +82,10 @@ class Pemilik extends CI_Controller{
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$data['result'] = $this->M_All->join_('transaksi', 'kamar', 'kosan', 'pemilik')->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
-		$this->load->view('pemilik/pemasukan');
+		$this->load->view('pemilik/pemasukan', $data);
 		$this->load->view('pemilik/foot_pemilik');
 		// }
 	}
@@ -97,9 +100,10 @@ class Pemilik extends CI_Controller{
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$data['result'] = $this->M_All->join_('transaksi', 'kamar', 'kosan', 'pemilik')->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
-		$this->load->view('pemilik/pengeluaran');
+		$this->load->view('pemilik/pengeluaran', $data);
 		$this->load->view('pemilik/foot_pemilik');
 		// }
 	}
@@ -117,7 +121,7 @@ class Pemilik extends CI_Controller{
 		// $sql="SELECT * FROM kosan WHERE id_pemilik='$_SESSION[id_pemilik]'";
 		// $data['result']=$this->conn->query($sql);
 
-		$data['result'] = $this->M_All->get('kosan')->result();
+		$data['result'] = $this->M_All->view_where('kosan', $where)->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik',$data);
 		$this->load->view('pemilik/data_kos', $data);
@@ -233,5 +237,74 @@ class Pemilik extends CI_Controller{
 		// header("location: ".base_url('index.php/pemilik/input_data_kos'));
 		// }
 		// 	mysqli_close($this->conn);
+	}
+
+	public function data_kamar()
+	{
+		$id_pemilik = $this->session->userdata('id_pemilik');
+		$where = array('id_pemilik' => $id_pemilik);
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		// $this->load->view('pemilik/input_data_kos');
+		$this->load->view('pemilik/foot_pemilik');
+	}
+
+	public function edit_kos($id)
+	{
+		$id_pemilik = $this->session->userdata('id_pemilik');
+		$where = array('id_pemilik' => $id_pemilik);
+		$where_ = array('kode_kos' => $id);
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+
+		$data['result'] = $this->M_All->view_where('kamar', $where_)->result();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		$this->load->view('pemilik/view_data_kos');
+		$this->load->view('pemilik/foot_pemilik');
+	}
+
+	public function tambah_kamar()
+	{
+		$config['upload_path']          = './asset_admin/upload_kos/';
+		$config['overwrite']        = true;
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 1024;
+		// $config['max_width']            = 1024;
+        // $config['max_height']           = 768;
+
+        $this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('foto')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('upload_form', $error);
+			echo "<script> alert('Foto Kos Gagal diunggah');</script>";
+        }else{
+            $data = array('upload_data' => $this->upload->data());
+            // $this->load->view('upload_success', $data);
+			$kode_kamar = $this->input->post('kode_kamar');
+			$alamat = $this->input->post('harga');
+			$jenis_kosan = $this->input->post('status');
+			$deskripsi = $this->input->post('tgl_tersedia');
+			$foto = $this->upload->data('file_name');
+
+			$data = array(
+				'kode_kamar' => $kode_kamar,
+				'nama_kos' => $nama_kos,
+				'alamat' => $alamat,
+				'deskripsi' => $deskripsi,
+				'foto' => $foto,
+				'jenis_kosan' => $jenis_kosan,
+				'saldo_kos' => 0,
+				'id_pemilik' => $this->session->userdata('id_pemilik'),
+			);
+			if ($this->M_All->insert('kamar', $data) != true) {
+				redirect('index.php/pemilik/');
+				echo "<script> alert('Data Kos berhasil ditambah');</script>";
+			}else{
+				redirect('index.php/pemilik/edit_kos');
+				echo "<script> alert('Data Kos gagal ditambah');</script>";
+			}
+        }
 	}
 }

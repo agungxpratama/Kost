@@ -21,14 +21,37 @@
                       <th>Jenis Kelamin</th>
                       <th>Email</th>
                       <th>No Telepon</th>
-                      <th>No Telepon 
+                      <th>No Telepon
                       wali</th>
                       <th>Foto</th>
                       <th>Aksi</th>
 
                     </tr>
                   </thead>
-                  
+                  <tbody>
+                      <?php foreach ($result as $r): ?>
+                      <tr>
+                          <td><?= $r->id_pencari ?></td>
+                          <td><?= $r->nama_pencari ?></td>
+                          <td><?= $r->instansi ?></td>
+                          <td><?= $r->tempat_lahir ?></td>
+                          <td><?= $r->tgl_lahir ?></td>
+                          <td><?= $r->asal_daerah ?></td>
+                          <td><?= $r->no_ktp ?></td>
+                          <td><?= $r->status ?></td>
+                          <td><?= $r->jenis_kelamin ?></td>
+                          <td><?= $r->email ?></td>
+                          <td><?= $r->no_telp ?></td>
+                          <td><?= $r->no_telp_wali ?></td>
+                          <td><?= $r->foto ?></td>
+                          <td>
+                              <a href="<?php echo base_url("index.php/pemilik/edit_kos/$r->kode_kos") ?>" class="btn btn-primary">Edit</a>
+                              <a href="<?php echo base_url("index.php/pemilik/hapus_kos?kode_kos=$r->kode_kos;") ?>" class="btn btn-danger">Hapus</a>
+                          </td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+
                 </table>
               </div>
             </div>

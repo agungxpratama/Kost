@@ -15,7 +15,15 @@
                       <th>Kode Kos</th>
                     </tr>
                   </thead>
-                  <tfoot>      
+                  <tbody>
+                      <?php foreach ($result as $r): ?>
+                      <tr>
+                          <td><?= $r->nama_pencari ?></td>
+                          <td><?= $r->tgl_bayar ?></td>
+                          <td><?= $r->nama_kos ?></td>
+                          <td><?= $r->kode_kos ?></td>
+                      </tr>
+                  <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>

@@ -12,12 +12,22 @@
                     <tr>
                       <th>No</th>
                       <th>Nama Kos</th>
-                      <th>Slado Kos</th>
+                      <th>Saldo Kos</th>
                       <th>Keterangan Pengeluaran</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                  
+                  <tbody>
+                      <?php
+                      $no = 0;
+                      foreach ($result as $r):
+                          $no++?>
+                          <tr>
+                              <td><?= $no ?></td>
+                              <td><?= $r->nama_kos ?></td>
+                              <td><?= $r->saldo_kos ?></td>
+                              <td></td>
+                          </tr>
+                      <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>

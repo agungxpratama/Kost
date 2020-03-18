@@ -35,10 +35,10 @@
                           <th><?= $r->atas_nama_rek ?></th>
                           <th><?= $r->bank ?></th>
                           <th><?= $r->jenis_kelamin ?></th>
-                          <th><img src="<?= base_url('asset/upload_pemilik/'.$r->foto); ?>" alt="foto_pemilik"></th>
+                          <th><img src="<?= base_url('asset/upload_pemilik/'.$r->foto); ?>" alt="foto_pemilik <?= $r->foto ?>"></th>
                           <th>
-                              <a href="<?php echo base_url("index.php/Admin/edit_kos/$r->id_pemilik") ?>" class="btn btn-primary">Edit</a>
-                              <a href="<?php echo base_url("index.php/Admin/hapus_kos/$r->id_pemilik") ?>" class="btn btn-danger">Hapus</a>
+                              <a href="<?php echo base_url("index.php/Admin/edit_pemilik/$r->id_pemilik") ?>" class="btn btn-primary">Edit</a>
+                              <a href="<?php echo base_url("index.php/Admin/hapus_pemilik/$r->id_pemilik") ?>" class="btn btn-danger">Hapus</a>
                           </th>
                       </tr>
                     <?php endforeach; ?>

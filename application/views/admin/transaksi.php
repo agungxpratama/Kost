@@ -23,7 +23,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                      
+                      <?php foreach ($result as $r): ?>
+                          <tr>
+                              <td><?= $r->id_transaksi ?></td>
+                              <td><?= $r->kode_kamar ?></td>
+                              <td><?= $r->id_pencari ?></td>
+                              <td><?= $r->total_bayar ?></td>
+                              <td><?= $r->tgl_bayar ?></td>
+                              <td><?= $r->tgl_masuk ?></td>
+                              <td><?= $r->tgl_keluar ?></td>
+                              <td><?= $r->sisa_pembayaran ?></td>
+                              <td>
+                                  <a href="<?php echo base_url("index.php/pemilik/edit_kos/$r->id_transaksi") ?>" class="btn btn-primary">Edit</a>
+                                  <a href="<?php echo base_url("index.php/pemilik/hapus_kos?kode_kos=$r->id_transaksi;") ?>" class="btn btn-danger">Hapus</a>
+                              </td>
+                          </tr>
+                      <?php endforeach; ?>
                   </tbody>
                 </table>
               </div>

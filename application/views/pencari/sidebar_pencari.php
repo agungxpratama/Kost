@@ -57,7 +57,7 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item active">
         <li class="nav-item">
-        <a class="nav-link collapsed" href="<?php echo base_url('pencari/') ?>">
+        <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pencarian') ?>">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pencarian Kos</span>
         </a>
@@ -65,7 +65,7 @@
 
        <li class="nav-item active">
         <li class="nav-item">
-        <a class="nav-link collapsed" href="<?php echo base_url('pencari/') ?>">
+        <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pemesanan') ?>">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pemesanan</span>
         </a>
@@ -73,7 +73,7 @@
 
       <li class="nav-item active">
         <li class="nav-item">
-        <a class="nav-link collapsed" href="<?php echo base_url('pencari/') ?>">
+        <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pembayaran') ?>">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pembayaran</span>
         </a>
@@ -81,7 +81,7 @@
 
        <li class="nav-item active">
         <li class="nav-item">
-        <a class="nav-link collapsed" href="<?php echo base_url('pencari/') ?>">
+        <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pesan') ?>">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pesan</span>
         </a>

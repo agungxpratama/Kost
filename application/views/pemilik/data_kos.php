@@ -33,8 +33,8 @@
                             <td><?= $r->saldo_kos; ?></td>
                             <td><?= $r->id_pemilik; ?></td>
                             <td>
-                                <a href="<?php echo base_url("index.php/Admin/hapus_kos?kode_kos=$r->kode_kos;") ?>" class="btn btn-primary">Hapus</a>
-                                <a href="<?php echo base_url("index.php/Admin/edit_kos?kode_kos=$r->kode_kos;") ?>" class="btn btn-danger">Edit</a>
+                                <a href="<?php echo base_url("index.php/pemilik/hapus_kos?kode_kos=$r->kode_kos;") ?>" class="btn btn-primary">Hapus</a>
+                                <a href="<?php echo base_url("index.php/pemilik/edit_kos/$r->kode_kos") ?>" class="btn btn-danger">Edit</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

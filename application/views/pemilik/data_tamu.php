@@ -8,6 +8,7 @@
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <!-- <?php print_r($result) ?> -->
                   <thead>
                     <tr>
                       <th>Nama</th>
@@ -24,8 +25,25 @@
                       <th>Foto</th>
                     </tr>
                   </thead>
-                  <tfoot>
+                  <tbody>
+                      <?php foreach ($result as $r): ?>
+                      <tr>
+                          <td><?= $r->nama_pencari ?></td>
+                          <td><?= $r->instansi ?></td>
+                          <td><?= $r->asal_daerah ?></td>
+                          <td><?= $r->no_ktp ?></td>
+                          <td><?= $r->no_telp ?></td>
+                          <td><?= $r->no_telp_wali ?></td>
+                          <td><?= $r->email ?></td>
+                          <td></td>
+                          <td><?= $r->tgl_masuk ?></td>
+                          <td><?= $r->tgl_keluar ?></td>
+                          <td></td>
+                          <td><?= $r->foto ?></td>
+                      </tr>
+                    <?php endforeach; ?>
                   </tbody>
+                  <tfoot>
                 </table>
               </div>
             </div>
