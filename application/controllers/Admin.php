@@ -171,7 +171,7 @@ class Admin extends CI_Controller{
 			);
 			if ($this->M_All->insert('artikel', $data) != true) {
 				redirect('index.php/admin/artikel');
-				echo "<script> alert('Data Artikel berhasil ditambah');</script>";
+				// echo "<script> alert('Data Artikel berhasil ditambah');</script>";
 			}else{
 				redirect('index.php/admin/artikel');
 				echo "<script> alert('Data Artikel gagal ditambah');</script>";

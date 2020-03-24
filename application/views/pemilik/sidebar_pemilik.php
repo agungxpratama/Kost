@@ -101,7 +101,7 @@
           <i class="fas fa-fw fa-folder"></i>
           <span>Data Kos</span>
         </a>
-        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Menu:</h6>
             <a class="collapse-item" href="<?php echo base_url('index.php/pemilik/input_data_kos'); ?>">Input Data Kos</a>

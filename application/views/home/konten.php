@@ -61,22 +61,6 @@
 	</section>
 	<!-- Hero section end -->
 
-	<div class="container">
-		<div class="card-deck">
-	      <?php foreach ($artikel as $a): ?>
-		  <div class="card">
-		    <img class="card-img-top" src=" <?= base_url('asset_admin/artikel/') ?> <?= $a->foto ?>" alt="Card image cap">
-		    <div class="card-body">
-		      <h5 class="card-title"><?= $a->judul ?></h5>
-		      <p class="card-text"><?= $a->deskripsi ?></p>
-		    </div>
-		    <div class="card-footer">
-		      <small class="text-muted"><?= $a->tgl_upload ?></small>
-		    </div>
-		  </div>
-  		  <?php endforeach; ?>
-	  </div>
-	</div>
 
 	<!-- Footer section  -->
 	<footer class="footer-section set-bg" data-setbg="<?php echo base_url() ?>asset_home/img/footer-bg.jpg">
@@ -106,3 +90,20 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Ngeko
 		</div>
 	</footer>
 	<!-- Footer section end -->
+
+	<div class="container">
+		<div class="card-deck">
+			<?php foreach ($artikel as $a): ?>
+				<div class="card">
+					<img class="card-img-top" src=" <?= base_url('asset_admin/artikel/'.$a->foto) ?>" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title"><?= $a->judul ?></h5>
+						<p class="card-text"><?= $a->deskripsi ?></p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted"><?= $a->tgl_upload ?></small>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	</div>

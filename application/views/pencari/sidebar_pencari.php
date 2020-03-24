@@ -67,7 +67,7 @@
         <li class="nav-item">
         <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pemesanan') ?>">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pemesanan</span>
+          <span>Riwayat Pemesanan</span>
         </a>
       </li>
 
@@ -75,7 +75,7 @@
         <li class="nav-item">
         <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pembayaran') ?>">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pembayaran</span>
+          <span>Info Pembayaran</span>
         </a>
       </li>
 
@@ -86,6 +86,23 @@
           <span>Pesan</span>
         </a>
       </li>
+
+      <li class="nav-item active">
+       <li class="nav-item">
+       <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pesan') ?>">
+         <i class="fas fa-fw fa-folder"></i>
+         <span>Contact & About Us</span>
+       </a>
+     </li>
+
+     <li class="nav-item active">
+      <li class="nav-item">
+      <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pesan') ?>">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Pesan</span>
+      </a>
+    </li>
+
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
