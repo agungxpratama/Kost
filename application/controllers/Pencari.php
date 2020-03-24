@@ -74,7 +74,7 @@ class Pencari extends CI_Controller{
 		$data['result'] = $this->M_All->view_where('kamar', $where_)->result();
 		$this->load->view('pencari/sidebar_pencari');
 		$this->load->view('pencari/header_pencari', $data);
-		$this->load->view('pencari/pesan_kos');
+		$this->load->view('pencari/pesan_kos', $data);
 		$this->load->view('pencari/foot_pencari');
 	}
 

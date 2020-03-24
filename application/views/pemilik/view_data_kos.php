@@ -61,7 +61,7 @@
                      <span aria-hidden="true">&times;</span>
                    </button>
                  </div>
-                 <form action="<?= base_url()?>index.php/pemilik/tambah_kamar" method="post" enctype="multipart/form-data">
+                 <form action="<?= base_url()?>index.php/pemilik/edit_kamar" method="post" enctype="multipart/form-data">
                  <div class="modal-body">
                        <div class="form-group">
                            <label for="exampleFormControlInput1">Kode Kos</label>
@@ -156,8 +156,8 @@
                                      <td><?= $r->status; ?></td>
                                      <td><?= $r->tgl_tersedia; ?></td>
                                      <td>
-                                         <a href="<?php echo base_url("index.php/pemilik/hapus_kos/$r->kode_kos;") ?>" class="btn btn-primary">Hapus</a>
-                                         <a href="<?php echo base_url("index.php/pemilik/edit_kos/$r->kode_kos") ?>" class="btn btn-danger">Edit</a>
+                                         <a href="<?php echo base_url("index.php/pemilik/hapus_kamar/$r->kode_kamar") ?>" class="btn btn-primary">Hapus</a>
+                                         <a href="<?php echo base_url("index.php/pemilik/edit_kamar/$r->kode_kamar") ?>" class="btn btn-danger">Edit</a>
                                      </td>
                                  </tr>
                              <?php endforeach; ?>

@@ -312,7 +312,7 @@ class Pemilik extends CI_Controller{
 
 			);
 			if ($this->M_All->insert('kamar', $data) != true) {
-				redirect('index.php/pemilik/edit_kos'.$this->session->userdata('kode_kos'));
+				redirect('index.php/pemilik/edit_kos/'.$this->session->userdata('kode_kos'));
 				echo "<script> alert('Data Kos berhasil ditambah');</script>";
 			}else{
 				redirect('index.php/pemilik/edit_kos');
@@ -325,7 +325,7 @@ class Pemilik extends CI_Controller{
 	{
 		$where = array('kode_kamar' => $id);
 		$this->M_All->delete($where,'kamar');
-		redirect('index.php/pemilik/data_kamar');
+		redirect('index.php/pemilik/data_kamar'.$this->session->userdata('kode_kos'));
 	}
 
 }
