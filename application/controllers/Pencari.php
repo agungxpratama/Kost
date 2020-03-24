@@ -125,7 +125,7 @@ class Pencari extends CI_Controller{
 		$id_pencari = $this->input->post('id_pencari');
 		$tgl_masuk = $this->input->post('tgl_masuk');
 		$tgl_keluar = $this->input->post('tgl_keluar');
-		$selisih = strtotime($tgl_masuk) - strtotime($tgl_keluar);
+		$selisih = strtotime($tgl_keluar) - strtotime($tgl_masuk);
 		$total_bayar = $harga*floor($selisih/(60*60*24*365));
 		$sisa_bayar = $total_bayar - $uang_muka;
 		$data = array(

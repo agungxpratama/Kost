@@ -83,7 +83,7 @@
                                         <input type="number" class="form-control" placeholder="" name="uang_muka">
                                         <input type="hidden" name="harga" value="<?= $r->harga; ?>/Tahun">
                                         <input type="hidden" name="kode_kamar" value="<?= $r->kode_kamar; ?>">
-                                        <input type="hidden" name="id_pencari" value="<?= $this->session->userdata('id_pencari'); ?>">
+                                        <input type="hidden" name="id_pencari" value="<?= $nama->id_pencari; ?>">
                                     </div>
                                     <div class="row">
                                         <div class="col">
