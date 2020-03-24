@@ -315,7 +315,7 @@ class Pemilik extends CI_Controller{
 				redirect('index.php/pemilik/edit_kos/'.$this->session->userdata('kode_kos'));
 				echo "<script> alert('Data Kos berhasil ditambah');</script>";
 			}else{
-				redirect('index.php/pemilik/edit_kos');
+				redirect('index.php/pemilik/edit_kos/'.$this->session->userdata('kode_kos'));
 				echo "<script> alert('Data Kos gagal ditambah');</script>";
 			}
         }

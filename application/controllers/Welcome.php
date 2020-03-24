@@ -34,8 +34,9 @@ class Welcome extends CI_Controller {
 	}
 
 	public function index(){
+		$data['artikel'] = $this->M_All->get('artikel')->result();
 		$this->load->view('home/head_home');
-		$this->load->view('home/konten');
+		$this->load->view('home/konten', $data);
 		$this->load->view('home/foot_home');
 	}
 
