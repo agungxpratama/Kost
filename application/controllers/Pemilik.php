@@ -253,18 +253,27 @@ class Pemilik extends CI_Controller{
 	public function edit_kos($id)
 	{
 		$newdat = array(
-			'kode_kos' => $id);
+			'kode_kos' => $id
+		);
 		$this->session->set_userdata($newdat);
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$where_ = array('kode_kos' => $id);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$data['kos'] = $this->M_All->view_where('kosan', $where_)->row();
 
 		$data['result'] = $this->M_All->view_where('kamar', $where_)->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
-		$this->load->view('pemilik/view_data_kos');
+		$this->load->view('pemilik/view_data_kos', $data);
 		$this->load->view('pemilik/foot_pemilik');
+	}
+
+	public function hapus_kos($id)
+	{
+		$where = array('kode_kos' => $id);
+		$this->M_All->delete($where,'kosan');
+		redirect('index.php/pemilik/view_data_kos');
 	}
 
 	public function tambah_kamar()
@@ -300,10 +309,10 @@ class Pemilik extends CI_Controller{
 				'status' => $status,
 				'foto' => $foto,
 				'tgl_tersedia' => $tanggal_tersedia,
-				
+
 			);
 			if ($this->M_All->insert('kamar', $data) != true) {
-				redirect('index.php/pemilik/');
+				redirect('index.php/pemilik/edit_kos'.$this->session->userdata('kode_kos'));
 				echo "<script> alert('Data Kos berhasil ditambah');</script>";
 			}else{
 				redirect('index.php/pemilik/edit_kos');
@@ -311,4 +320,12 @@ class Pemilik extends CI_Controller{
 			}
         }
 	}
+
+	public function hapus_kamar($id)
+	{
+		$where = array('kode_kamar' => $id);
+		$this->M_All->delete($where,'kamar');
+		redirect('index.php/pemilik/data_kamar');
+	}
+
 }

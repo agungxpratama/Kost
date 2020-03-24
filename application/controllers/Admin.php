@@ -37,10 +37,15 @@ class Admin extends CI_Controller{
 		// }
 	}
 
-	public function logout(){
+	public function logoutt(){
 		session_destroy();
 		header("location: ".base_url());
 	}
+
+	function Logout(){
+        $this->session->sess_destroy();
+        redirect(base_url('index.php/welcome'));
+    }
 
 	public function data_penghuni(){
 		// if (empty($_SESSION['admin'])) {
@@ -181,6 +186,12 @@ class Admin extends CI_Controller{
 		redirect('index.php/admin/artikel');
 	}
 
+	public function hapus_kos($id)
+	{
+		$where = array('kode_kos' => $id);
+		$this->M_All->delete($where,'kosan');
+		redirect('index.php/pemilik/view_data_kos');
+	}
 
 
 

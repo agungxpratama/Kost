@@ -16,14 +16,14 @@
                             ?>
                         <?php foreach ($result as $r): ?>
                             <div class="card">
-                                <img class="card-img-top" src="<?php echo base_url('asset_admin/upload_kos/'.$r->foto); ?>" alt="Card image cap">
+                                <img class="card-img-top" src="<?php echo base_url('asset_admin/upload_kos/'.$r->foto); ?>" alt="<?= $r->foto ?>">
                                 <div class="card-body">
                                     <h3 class="card-title"><?php echo $r->nama_kos; ?></h3>
                                     <p class="card-text">
                                         <?php echo $r->deskripsi; ?><br>
                                         Alamat : <?php echo $r->alamat; ?>
                                     </p>
-                                    <a href="" class="btn btn-success">Pesan</a>
+                                    <a href="<?= base_url('index.php/pencari/view_data_kos/').$r->kode_kos; ?>" class="btn btn-success">Lihat Ketersediaan Kamar</a>
                                     <a href="https://wa.me/<?= $r->no_telp?>" class="btn btn-warning">Hubungi</a>
                                 </div>
                             </div>

@@ -98,42 +98,74 @@
          </div>
          <div class="card shadow mb-4">
            <div class="card-header py-3">
-             <h6 class="m-0 font-weight-bold text-primary">Data Kamar</h6>
+             <h6 class="m-0 font-weight-bold text-primary">Keterangan Kos</h6>
            </div>
            <div class="card-body">
-             <div class="table-responsive">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                 <thead>
-                   <tr>
-                     <th>Kode Kamar</th>
-                     <th>Harga</th>
-                     <th>Deskripsi</th>
-                     <th>Foto</th>
-                     <th>Status</th>
-                     <th>Tanggal Tersedia</th>
-                     <th>Aksi</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <?php foreach ($result as $r): ?>
-                       <tr>
-                           <td><?= $r->kode_kamar;?></td>
-                           <td><?= $r->harga; ?></td>
-                           <td><?= $r->deskripsi; ?></td>
-                           <td><?= $r->foto; ?></td>
-                           <td><?= $r->status; ?></td>
-                           <td><?= $r->tgl_tersedia; ?></td>
-                           <td>
-                               <a href="<?php echo base_url("index.php/pemilik/hapus_kos/$r->kode_kos;") ?>" class="btn btn-primary">Hapus</a>
-                               <a href="<?php echo base_url("index.php/pemilik/edit_kos/$r->kode_kos") ?>" class="btn btn-danger">Edit</a>
-                           </td>
-                       </tr>
-                   <?php endforeach; ?>
-                 </tbody>
-
-               </table>
-             </div>
+               <div class="table-responsive">
+                 <table class="table" width="100%" cellspacing="0">
+                     <tr>
+                         <th width="20%">Kode Kos</th>
+                         <th><?= $kos->kode_kos ?></th>
+                     </tr>
+                     <tr>
+                         <td>Nama Kos</td>
+                         <td><?= $kos->nama_kos ?></td>
+                     </tr>
+                     <tr>
+                         <td>Alamat</td>
+                         <td><?= $kos->alamat ?></td>
+                     </tr>
+                     <tr>
+                         <td>Deskripsi</td>
+                         <td><?= $kos->deskripsi ?></td>
+                     </tr>
+                     <tr>
+                         <td>Jenis Kosan</td>
+                         <td><?= $kos->jenis_kosan ?></td>
+                     </tr>
+                 </table>
+               </div>
+               <hr>
            </div>
+
+           <div class="card shadow mb-4">
+             <div class="card-header py-3">
+               <h6 class="m-0 font-weight-bold text-primary">Data Kamar</h6>
+             </div>
+             <div class="card-body">
+                 <div class="table-responsive">
+                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                         <thead>
+                             <tr>
+                                 <th>Kode Kamar</th>
+                                 <th>Harga</th>
+                                 <th>Deskripsi</th>
+                                 <th>Foto</th>
+                                 <th>Status</th>
+                                 <th>Tanggal Tersedia</th>
+                                 <th>Aksi</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <?php foreach ($result as $r): ?>
+                                 <tr>
+                                     <td><?= $r->kode_kamar;?></td>
+                                     <td><?= $r->harga; ?></td>
+                                     <td><?= $r->deskripsi; ?></td>
+                                     <td><?= $r->foto; ?></td>
+                                     <td><?= $r->status; ?></td>
+                                     <td><?= $r->tgl_tersedia; ?></td>
+                                     <td>
+                                         <a href="<?php echo base_url("index.php/pemilik/hapus_kos/$r->kode_kos;") ?>" class="btn btn-primary">Hapus</a>
+                                         <a href="<?php echo base_url("index.php/pemilik/edit_kos/$r->kode_kos") ?>" class="btn btn-danger">Edit</a>
+                                     </td>
+                                 </tr>
+                             <?php endforeach; ?>
+                         </tbody>
+
+                     </table>
+                 </div>
+             </div>
          </div>
 
        </div>
