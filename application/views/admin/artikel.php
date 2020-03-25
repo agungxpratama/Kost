@@ -74,7 +74,7 @@
                               <td>
                                   <img src="<?= base_url('asset_admin/artikel/').$r->foto ?>" alt="artikel" width="200px"></td>
                               <td>
-                                  <a href="<?php echo base_url("index.php/admin/edit/$r->id_artikel") ?>" class="btn btn-primary">Edit</a>
+                                  <a href="<?php echo base_url("index.php/admin/edit_artikel/$r->id_artikel") ?>" class="btn btn-primary">Edit</a>
                                   <a href="<?php echo base_url("index.php/admin/hapus_artikel/$r->id_artikel") ?>" class="btn btn-danger">Hapus</a>
                               </td>
                           </tr>

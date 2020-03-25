@@ -103,6 +103,35 @@ class Admin extends CI_Controller{
 		// }
 	}
 
+	public function edit_pemilik($id)
+	{
+		$where_ = array('id_pemilik' => $id, );
+		$username = $this->session->userdata('username');
+		$where = array('username' => $username);
+		$data['nama'] = $this->M_All->view_where('admin', $where)->row();
+		$data['result'] = $this->M_All->view_where('pemilik', $where_)->row();
+		$this->load->view('admin/sidebar_admin');
+		$this->load->view('admin/header_admin', $data);
+		$this->load->view('admin/edit_pemilik', $data);
+		$this->load->view('admin/foot_admin');
+	}
+
+	public function update_pemilik()
+	{
+		$where = array('id_pemilik' => $this->input->post('id_pemilik'), );
+		$data = array(
+			'nama_pemilik' => $this->input->post('nama_pemilik'),
+			'no_telp' => $this->input->post('no_telp'),
+			'email' => $this->input->post('email'),
+			'no_rek' => $this->input->post('no_rek'),
+			'atas_nama_rek' => $this->input->post('atas_nama_rek'),
+			'bank' => $this->input->post('bank'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+		);
+		$this->M_All->update('pemilik', $where, $data);
+		redirect('index.php/admin/data_pemilik');
+	}
+
 	public function transaksi(){
 		// if (empty($_SESSION['admin'])) {
   		// header("location: ".base_url());
@@ -138,6 +167,31 @@ class Admin extends CI_Controller{
 		// }
 	}
 
+	public function edit_artikel($id)
+	{
+		$where_ = array('id_artikel' => $id, );
+		$username = $this->session->userdata('username');
+		$where = array('username' => $username);
+		$data['nama'] = $this->M_All->view_where('admin', $where)->row();
+		$data['result'] = $this->M_All->view_where('artikel', $where_)->row();
+		$this->load->view('admin/sidebar_admin');
+		$this->load->view('admin/header_admin', $data);
+		$this->load->view('admin/edit_artikel', $data);
+		$this->load->view('admin/foot_admin');
+	}
+
+	public function update_artikel($value='')
+	{
+		$where = array('id_artikel' => $this->input->post('id_artikel'), );
+		$data = array(
+			'judul' => $this->input->post('judul'),
+			'kategori_artikel' => $this->input->post('kategori_artikel'),
+			'deskripsi' => $this->input->post('deskripsi'),
+		);
+		$this->M_All->update('artikel', $where, $data);
+		redirect('index.php/admin/artikel');
+	}
+
 	public function tambah_artikel()
 	{
 		$config['upload_path']          = './asset_admin/artikel/';
@@ -165,8 +219,8 @@ class Admin extends CI_Controller{
 				'judul' => $judul,
 				'kategori_artikel' => $kategori_artikel,
 				'deskripsi' => $deskripsi,
-				'tgl_upload' => 'now()',
-				'tgl_ubah' => 'now()',
+				'tgl_upload' => date('Y-m-d'),
+				'tgl_ubah' => date('Y-m-d'),
 				'foto' => $foto,
 			);
 			if ($this->M_All->insert('artikel', $data) != true) {
@@ -177,6 +231,38 @@ class Admin extends CI_Controller{
 				echo "<script> alert('Data Artikel gagal ditambah');</script>";
 			}
         }
+	}
+
+	public function edit_kos($id)
+	{
+		$where_ = array('kode_kos' => $id, );
+		$username = $this->session->userdata('username');
+		$where = array('username' => $username);
+		$data['nama'] = $this->M_All->view_where('admin', $where)->row();
+		$data['kos'] = $this->M_All->view_where('kosan', $where_)->row();
+		$this->load->view('admin/sidebar_admin');
+		$this->load->view('admin/header_admin', $data);
+		$this->load->view('admin/edit_kos', $data);
+		$this->load->view('admin/foot_admin');
+	}
+
+	public function update_kos()
+	{
+		$where = array('kode_kos' => $this->input->post('kode_kos'), );
+		$data = array(
+			'nama_kos' => $this->input->post('nama_kos'),
+			'alamat' => $this->input->post('alamat'),
+			'deskripsi' => $this->input->post('deskripsi'),
+		);
+		$this->M_All->update('kosan', $where, $data);
+		redirect('index.php/admin/data_kos');
+	}
+
+	public function hapus_pemilik($id)
+	{
+		$where = array('id_pemilik' => $id);
+		$this->M_All->delete($where, 'pemilik');
+		redirect('index.php/admin/data_pemilik');
 	}
 
 	public function hapus_artikel($id)
@@ -190,7 +276,7 @@ class Admin extends CI_Controller{
 	{
 		$where = array('kode_kos' => $id);
 		$this->M_All->delete($where,'kosan');
-		redirect('index.php/pemilik/view_data_kos');
+		redirect('index.php/admin/view_data_kos');
 	}
 
 
