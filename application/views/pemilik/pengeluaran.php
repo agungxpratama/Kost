@@ -17,7 +17,7 @@
           <div class="modal-body">
               <form class="" action="<?=base_url('index.php/pemilik/tambah_pengeluaran'); ?>" method="post">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Ketrerangan Pengeluaran</label>
+                    <label for="exampleInputEmail1">Keterangan Pengeluaran</label>
                     <input type="text" class="form-control"  placeholder="" name="keterangan_pengeluaran">
                   </div>
                   <div class="form-group">
@@ -66,7 +66,41 @@
                               <td><?= $r->harga ?></td>
                               <td><?= $r->jumlah ?></td>
                               <td>
-                                  <a href="<?php echo base_url("index.php/pemilik/edit_pengeluaran/$r->kode_pengeluaran") ?>" class="btn btn-primary">Edit</a>
+                                  <button name="button" type="button" data-toggle="modal" data-target="#modal<?= $r->kode_pengeluaran ?>" class="btn btn-primary">Edit</button>
+                                  <div class="modal fade" id="modal<?= $r->kode_pengeluaran ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Input Pengeluaran</h5>
+                                          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="" action="<?=base_url('index.php/pemilik/edit_pengeluaran'); ?>" method="post">
+                                                <div class="form-group">
+                                                  <input type="hidden" name="kode_pengeluaran" value="<?= $r->kode_pengeluaran ?>">
+                                                  <label for="exampleInputEmail1">Ketrerangan Pengeluaran</label>
+                                                  <input type="text" class="form-control"  placeholder="" name="keterangan_pengeluaran" value="<?= $r->keterangan_pengeluaran ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleInputEmail1">Harga</label>
+                                                  <input type="text" class="form-control"  placeholder="" name="harga" value="<?= $r->harga ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="exampleInputEmail1">Jumlah Pengeluaran</label>
+                                                  <input type="text" class="form-control"  placeholder="" name="jumlah" value="<?= $r->jumlah ?>">
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                          <button class="btn btn-primary" type="submit">Update</button>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- <a href="<?php echo base_url("index.php/pemilik/edit_pengeluaran/$r->kode_pengeluaran") ?>" class="btn btn-primary">Edit</a> -->
                                   <a href="<?php echo base_url("index.php/pemilik/hapus_pengeluaran/$r->kode_pengeluaran") ?>" class="btn btn-danger">Hapus</a>
                               </td>
                           </tr>

@@ -119,9 +119,23 @@ class Pemilik extends CI_Controller{
 		redirect('index.php/pemilik/pengeluaran');
 	}
 
+	public function edit_pengeluaran()
+	{
+		$where = array('kode_pengeluaran' => $this->input->post('kode_pengeluaran'), );
+		$data = array(
+			'keterangan_pengeluaran' => $this->input->post('keterangan_pengeluaran'),
+			'harga' => $this->input->post('harga'),
+			'jumlah' => $this->input->post('jumlah'),
+		);
+		$this->M_All->update('pengeluaran', $where, $data);
+		redirect('index.php/pemilik/pengeluaran');
+	}
+
 	public function hapus_pengeluaran($id)
 	{
-		
+		$where = array('kode_pengeluaran' => $id);
+		$this->M_All->delete($where,'pengeluaran');
+		redirect('index.php/pemilik/pengeluaran');
 	}
 
 	public function view_data_kos(){
