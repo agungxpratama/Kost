@@ -100,13 +100,30 @@ class Pemilik extends CI_Controller{
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
-		$data['result'] = $this->M_All->join_('transaksi', 'kamar', 'kosan', 'pemilik')->result();
+		$data['result'] = $this->M_All->get('pengeluaran')->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
 		$this->load->view('pemilik/pengeluaran', $data);
 		$this->load->view('pemilik/foot_pemilik');
 		// }
 	}
+
+	public function tambah_pengeluaran()
+	{
+		$data = array(
+			'keterangan_pengeluaran' => $this->input->post('keterangan_pengeluaran'),
+			'harga' => $this->input->post('harga'),
+			'jumlah' => $this->input->post('jumlah'),
+		);
+		$this->M_All->insert('pengeluaran', $data);
+		redirect('index.php/pemilik/pengeluaran');
+	}
+
+	public function hapus_pengeluaran($id)
+	{
+		
+	}
+
 	public function view_data_kos(){
 		// if (empty($_SESSION['pemilik'])) {
   		// header("location: ".base_url());

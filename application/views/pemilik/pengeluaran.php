@@ -1,4 +1,42 @@
 <div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Data Pengeluaran</h1>
+      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah</a>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Input Pengeluaran</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form class="" action="<?=base_url('index.php/pemilik/tambah_pengeluaran'); ?>" method="post">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Ketrerangan Pengeluaran</label>
+                    <input type="text" class="form-control"  placeholder="" name="keterangan_pengeluaran">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Harga</label>
+                    <input type="text" class="form-control"  placeholder="" name="harga">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Jumlah Pengeluaran</label>
+                    <input type="text" class="form-control"  placeholder="" name="jumlah">
+                  </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" type="submit">Tambah</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -11,9 +49,10 @@
                   <thead>
                     <tr>
                       <th>No</th>
-                      <th>Nama Kos</th>
-                      <th>Saldo Kos</th>
                       <th>Keterangan Pengeluaran</th>
+                      <th>Harga</th>
+                      <th>Jumlah</th>
+                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -23,9 +62,13 @@
                           $no++?>
                           <tr>
                               <td><?= $no ?></td>
-                              <td><?= $r->nama_kos ?></td>
-                              <td><?= $r->saldo_kos ?></td>
-                              <td></td>
+                              <td><?= $r->keterangan_pengeluaran ?></td>
+                              <td><?= $r->harga ?></td>
+                              <td><?= $r->jumlah ?></td>
+                              <td>
+                                  <a href="<?php echo base_url("index.php/pemilik/edit_pengeluaran/$r->kode_pengeluaran") ?>" class="btn btn-primary">Edit</a>
+                                  <a href="<?php echo base_url("index.php/pemilik/hapus_pengeluaran/$r->kode_pengeluaran") ?>" class="btn btn-danger">Hapus</a>
+                              </td>
                           </tr>
                       <?php endforeach; ?>
                   </tbody>
