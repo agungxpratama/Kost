@@ -35,31 +35,22 @@
 
 	<!-- Hero section -->
 	<section class="hero-section">
-		<div class="hero-slider owl-carousel">
-			<div class="hero-slide-item set-bg" data-setbg="<?php echo base_url() ?>asset_home/img/slider-bg-1.jpg">
-				<div class="hs-text">
-					<h2 class="hs-title-1"><span>Cari</span></h2>
-					<h2 class="hs-title-2"><span>Kos</span></h2>
-					<h2 class="hs-title-3"><span>DISINI AJA !!!</span></h2>
-				</div>
-			</div>
-			<div class="hero-slide-item set-bg" data-setbg="<?php echo base_url() ?>asset_home/img/slider-bg-3.jpg">
-				<div class="hs-text">
-					<h2 class="hs-title-1"><span>Cari</span></h2>
-					<h2 class="hs-title-2"><span>Kos</span></h2>
-					<h2 class="hs-title-3"><span>DISINI AJA !!!</span></h2>
-				</div>
-			</div>
-			<div class="hero-slide-item set-bg" data-setbg="<?php echo base_url() ?>asset_home/img/slider-bg-2.jpg">
-				<div class="hs-text">
-					<h2 class="hs-title-1"><span>Cari</span></h2>
-					<h2 class="hs-title-2"><span>Kos</span></h2>
-					<h2 class="hs-title-3"><span>DISINI AJA !!!</span></h2>
-				</div>
-			</div>
-		</div>
+        <div class="container">
+            <div class="media">
+              <img width="25%" class="align-self-start mr-3" src=" <?= base_url('asset_admin/artikel/'.$artikel->foto) ?>" alt="Generic placeholder image">
+              <div class="media-body">
+                <h5 class="mt-0"><?= $artikel->judul ?></h5>
+                <p>Tanggal Atrikel : <?= $artikel->tgl_ubah ?></p>
+                <p><?= $artikel->deskripsi ?></p>
+              </div>
+            </div>
+        </div>
 	</section>
 	<!-- Hero section end -->
+
+    <div class="clearfix">
+
+    </div>
 
 
 	<!-- Footer section  -->
@@ -90,22 +81,3 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Ngeko
 		</div>
 	</footer>
 	<!-- Footer section end -->
-
-	<div class="container">
-		<div class="card-columns">
-			<?php foreach ($artikel as $a): ?>
-				<div class="card">
-					<a href="<?= base_url('index.php/welcome/view_artikel/'.$a->id_artikel); ?>">
-						<img class="card-img-top" src=" <?= base_url('asset_admin/artikel/'.$a->foto) ?>" alt="Card image cap">
-					</a>
-					<div class="card-body">
-						<h5 class="card-title"><?= $a->judul ?></h5>
-						<p class="card-text"><?= $a->deskripsi ?></p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted"><?= $a->tgl_upload ?></small>
-					</div>
-				</div>
-			<?php endforeach; ?>
-		</div>
-	</div>

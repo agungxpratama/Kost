@@ -40,6 +40,15 @@ class Welcome extends CI_Controller {
 		$this->load->view('home/foot_home');
 	}
 
+	public function view_artikel($id)
+	{
+		$where = array('id_artikel' => $id, );
+		$data['artikel'] = $this->M_All->view_where('artikel', $where)->row();
+		$this->load->view('home/head_home');
+		$this->load->view('home/view_artikel', $data);
+		$this->load->view('home/foot_home');
+	}
+
 	public function login_pencari(){
 		$this->load->view('login/head_login');
 		$this->load->view('login/login_pencari');

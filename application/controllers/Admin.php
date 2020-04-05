@@ -150,6 +150,27 @@ class Admin extends CI_Controller{
 		// }
 	}
 
+	public function edit_transaksi()
+	{
+		$where = array('id_transaksi' => $this->input->post('id_transaksi'), );
+		$data = array(
+			'total_bayar' => $this->input->post('total_bayar'),
+			'tgl_bayar' => $this->input->post('tgl_bayar'),
+			'tgl_masuk' => $this->input->post('tgl_masukr'),
+			'tgl_keluar' => $this->input->post('tgl_keluar'),
+			'sisa_pembayaran' => $this->input->post('sisa_pembayaran'),
+		);
+		$this->M_All->update('transaksi', $where, $data);
+		redirect('index.php/admin/transaksi');
+	}
+
+	public function hapus_transaksi($id)
+	{
+		$where = array('id_transaksi' => $id);
+		$this->M_All->delete($where, 'transaksi');
+		redirect('index.php/admin/transaksi');
+	}
+
 	public function artikel(){
 		// if (empty($_SESSION['admin'])) {
   		// header("location: ".base_url());
@@ -196,7 +217,7 @@ class Admin extends CI_Controller{
 	{
 		$config['upload_path']          = './asset_admin/artikel/';
 		$config['overwrite']        = true;
-        $config['allowed_types']        = 'gif|jpg|png';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
         // $config['max_size']             = 1024;
 		// $config['max_width']            = 1024;
         // $config['max_height']           = 768;
@@ -222,6 +243,7 @@ class Admin extends CI_Controller{
 				'tgl_upload' => date('Y-m-d'),
 				'tgl_ubah' => date('Y-m-d'),
 				'foto' => $foto,
+				'username' => $this->session->userdata('username');
 			);
 			if ($this->M_All->insert('artikel', $data) != true) {
 				redirect('index.php/admin/artikel');
