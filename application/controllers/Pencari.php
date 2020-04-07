@@ -23,6 +23,8 @@ class Pencari extends CI_Controller{
 	}
 
 	public function index(){
+		$data['artikel'] = $this->M_All->get('artikel')->result();
+
 		// if (empty($_SESSION['pencari'])) {
   		// header("location: ".base_url());
 		// } else{
@@ -58,9 +60,10 @@ class Pencari extends CI_Controller{
 		$id_pencari = $this->session->userdata('id_pencari');
 		$where = array('id_pencari' => $id_pencari);
 		$data['nama'] = $this->M_All->view_where('pencari', $where)->row();
+		$data['result'] = $this->M_All->get('kosan')->result();
 		$this->load->view('pencari/sidebar_pencari');
 		$this->load->view('pencari/header_pencari', $data);
-		$this->load->view('pencari/konten');
+		$this->load->view('pencari/konten', $data);
 		$this->load->view('pencari/foot_pencari');
 	}
 
@@ -119,24 +122,62 @@ class Pencari extends CI_Controller{
 
 	public function pesan_kamar()
 	{
+		$id_transaksi = $this->M_All->count('transaksi')+1;
 		$uang_muka = $this->input->post('uang_muka');
 		$harga = $this->input->post('harga');
 		$kode_kamar = $this->input->post('kode_kamar');
 		$id_pencari = $this->input->post('id_pencari');
 		$tgl_masuk = $this->input->post('tgl_masuk');
 		$tgl_keluar = $this->input->post('tgl_keluar');
-		$selisih =  strtotime($tgl_masuk) - strtotime($tgl_keluar);
-		$total_bayar = $harga*floor($selisih/(60*60*24*365));
+		$selisih =  strtotime($tgl_keluar) - strtotime($tgl_masuk);
+		$selisih_tahun = ceil($selisih/(60*60*24*365));
+		$total_bayar = $harga * $selisih_tahun;
 		$sisa_bayar = $total_bayar - $uang_muka;
 		$data = array(
+			'id_transaksi' => 'trx00'.$id_transaksi,
 			'kode_kamar' => $kode_kamar,
 			'id_pencari' => $id_pencari,
 			'tgl_masuk' => $tgl_masuk,
 			'tgl_keluar' => $tgl_keluar,
 			'total_bayar' => $total_bayar,
 			'sisa_pembayaran' => $sisa_bayar,
+			'status_transaksi' => 0,
 		);
+		// print_r($data);
 		$this->M_All->insert('transaksi', $data);
 		redirect('index.php/pencari');
+	}
+
+	public function simpan_bukti()
+	{
+		$config['upload_path']          = './asset_admin/bukti_bayar/';
+		$config['overwrite']        = true;
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 1024;
+
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload('foto')){
+            $error = array('error' => $this->upload->display_errors());
+            // $this->load->view('upload_form', $error);
+			echo "<script> alert('Foto Kos Gagal diunggah');</script>";
+        }else{
+            $data = array('upload_data' => $this->upload->data());
+            // $this->load->view('upload_success', $data);
+			$foto = $this->upload->data('file_name');
+
+			$where = array('id_transaksi' => $this->input->post('id_transaksi'), );
+
+			$data = array(
+				'status_transaksi' => 2,
+				'bukti_bayar' => $foto,
+			);
+			if ($this->M_All->update('transaksi', $where, $data) != true) {
+				redirect('index.php/pencari/pembayaran/');
+				echo "<script> alert('Upload bukti berhasil diupload');</script>";
+			}else{
+				redirect('index.php/pencari/pembayaran/');
+				echo "<script> alert('Bukti gagal diupload');</script>";
+			}
+        }
 	}
 }

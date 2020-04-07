@@ -26,7 +26,24 @@
                          <td><?= $r->tgl_bayar ?></td>
                          <td><?= $r->tgl_masuk ?></td>
                          <td><?= $r->tgl_keluar ?></td>
-                         <td></td>
+                         <td>
+                            <?php if ($r->status_transaksi == 0): ?>
+                                <button type="anchor" class="btn btn-warning" disabled>
+                                    Belum diproses Pemilik Kos
+                                </button>
+                            <?php elseif ($r->status_transaksi == 1): ?>
+                                <a href="<?= base_url('index.php/pencari/pembayaran'); ?>" class="btn btn-primary">
+                                    Belum adna bayar
+                                </a>
+                            <?php elseif ($r->status_transaksi == 2): ?>
+                                <button type="anchor" class="btn btn-success" disabled>
+                                    Lunas
+                                </button>
+                            <?php else: ?>
+                                Maaf Hubungi Pemilik atau Admin
+                            <?php endif; ?>
+                            <!-- <?= $r->status ?> -->
+                        </td>
                      </tr>
                    <?php endforeach; ?>
                  </tbody>

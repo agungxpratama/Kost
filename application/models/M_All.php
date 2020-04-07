@@ -63,9 +63,28 @@ class M_All extends CI_Model{
         return $this->db->get();
     }
 
-    function count($where)
+    function join_get_bayar($id)
     {
-        return $this->db->count_all_results($where);
+        $this->db->select('no_rek');
+        $this->db->from('transaksi');
+        $this->db->join('kamar', 'kamar.kode_kamar = transaksi.kode_kamar');
+        $this->db->join('kosan', 'kosan.kode_kos = kamar.kode_kamar');
+        $this->db->join('pemilik', 'pemilik.id_pemilik = kosan.id_pemilik');
+        $this->db->where('id_transaksi', $id);
+        return $this->db->get();
+    }
+
+    function count($table)
+    {
+        return $this->db->count_all_results($table);
+    }
+
+    function count_where($table, $where)
+    {
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where($where);
+        return $this->db->count_all_results();// code...
     }
 
     function sum($kind, $table)

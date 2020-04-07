@@ -56,6 +56,14 @@ class Pemilik extends CI_Controller{
 		// }
 	}
 
+	public function proses_booking($id)
+	{
+		$where = array('id_transaksi' => $id, );
+		$data = array('status_transaksi' => 1, );
+		$this->M_All->update('transaksi', $where, $data);
+		redirect('index.php/pemilik/booking');
+	}
+
 	public function data_tamu(){
 		// if (empty($_SESSION['pemilik'])) {
   		// header("location: ".base_url());

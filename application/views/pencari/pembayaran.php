@@ -24,7 +24,50 @@
                          <td><?= $r->kode_kamar ?></td>
                          <td><?= $r->sisa_pembayaran ?></td>
                          <td><?= $r->total_bayar ?></td>
-                         <td></td>
+                         <td>
+                             <?php if ($r->status_transaksi == 0): ?>
+                                 <button type="anchor" class="btn btn-warning" disabled>
+                                     Belum diproses Pemilik Kos
+                                 </button>
+                             <?php elseif ($r->status_transaksi == 1): ?>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                 Pembayaran
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                 <div class="modal-dialog" role="document">
+                                   <div class="modal-content">
+                                     <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                         <span aria-hidden="true">&times;</span>
+                                       </button>
+                                     </div>
+                                     <div class="modal-body">
+                                        Nomor Rekening : <?= $this->M_All->join_get_bayar($r->id_transaksi)->row()->no_rek; ?>
+                                       <form id="bukti" class="form" action="<?= base_url('index.php/pencari/simpan_bukti') ?>" method="post">
+                                           <label for="bukti">Masukan bukti pembayaran</label>
+                                           <input class="form-control" type="file" name="foto" value="">
+                                           <input type="hidden" name="id_transaksi" value="<?= $r->id_transaksi ?>">
+                                       </form>
+                                     </div>
+                                     <div class="modal-footer">
+                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                       <button type="button" class="btn btn-primary" onclick="document.getElementById('bukti').submit();">Upload</button>
+                                     </div>
+                                   </div>
+                                 </div>
+                                </div>
+                            <?php elseif ($r->status_transaksi == 2): ?>
+                                 <button type="anchor" class="btn btn-success" disabled>
+                                     Lunas
+                                 </button>
+                             <?php else: ?>
+                                 Maaf Hubungi Pemilik atau Admin
+                             <?php endif; ?>
+                         </td>
                      </tr>
                    <?php endforeach; ?>
                  </tbody>

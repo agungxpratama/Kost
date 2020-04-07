@@ -38,6 +38,14 @@
   <script src="<?php echo base_url() ?>asset_admin/js/demo/chart-area-demo.js"></script>
   <script src="<?php echo base_url() ?>asset_admin/js/demo/chart-pie-demo.js"></script>
 
+  <script src="<?= base_url('asset_bootstrap/'); ?>datatables/js/jquery.dataTables.min.js"></script>
+  <script src="<?= base_url('asset_bootstrap/'); ?>datatables/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+      $(document).ready(function(){
+          $('#dataTable').DataTable();
+      });
+  </script>
+
 </body>
 
 </html>

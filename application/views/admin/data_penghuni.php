@@ -45,8 +45,8 @@
                           <td><?= $r->no_telp_wali ?></td>
                           <td><?= $r->foto ?></td>
                           <td>
-                              <a href="<?php echo base_url("index.php/admin/edit_kos/$r->id_pencari") ?>" class="btn btn-primary">Edit</a>
-                              <a href="<?php echo base_url("index.php/admin/hapus_kos/$r->id_pencari") ?>" class="btn btn-danger">Hapus</a>
+                              <a href="<?php echo base_url("index.php/admin/edit_penghuni/$r->id_pencari") ?>" class="btn btn-primary">Edit</a>
+                              <a href="<?php echo base_url("index.php/admin/hapus_penghuni/$r->id_pencari") ?>" class="btn btn-danger">Hapus</a>
                           </td>
                       </tr>
                     <?php endforeach; ?>

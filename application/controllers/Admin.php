@@ -243,7 +243,7 @@ class Admin extends CI_Controller{
 				'tgl_upload' => date('Y-m-d'),
 				'tgl_ubah' => date('Y-m-d'),
 				'foto' => $foto,
-				'username' => $this->session->userdata('username');
+				'username' => $this->session->userdata('username')
 			);
 			if ($this->M_All->insert('artikel', $data) != true) {
 				redirect('index.php/admin/artikel');
@@ -301,6 +301,15 @@ class Admin extends CI_Controller{
 		redirect('index.php/admin/view_data_kos');
 	}
 
+	public function edit_penghuni()
+	{
+		// code...
+	}
+
+	public function hapus_penghuni()
+	{
+		// code...
+	}
 
 
 }
