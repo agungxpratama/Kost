@@ -306,9 +306,11 @@ class Admin extends CI_Controller{
 		// code...
 	}
 
-	public function hapus_penghuni()
+	public function hapus_penghuni($id)
 	{
-		// code...
+		$where = array('id_penghuni' => $id);
+		$this->M_All->delete($where, 'pencari');
+		redirect('index.php/admin/data_penghuni');
 	}
 
 
