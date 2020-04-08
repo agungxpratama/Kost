@@ -79,13 +79,13 @@
         </a>
       </li>
 
-       <li class="nav-item active">
+       <!-- <li class="nav-item active">
         <li class="nav-item">
         <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pesan') ?>">
           <i class="fas fa-fw fa-folder"></i>
           <span>Pesan</span>
         </a>
-      </li>
+      </li> -->
 
       <li class="nav-item active">
        <li class="nav-item">
@@ -95,13 +95,13 @@
        </a>
      </li>
 
-     <li class="nav-item active">
+     <!-- <li class="nav-item active">
       <li class="nav-item">
       <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pesan') ?>">
         <i class="fas fa-fw fa-folder"></i>
         <span>Pesan</span>
       </a>
-    </li>
+    </li> -->
 
 
       <!-- Divider -->
