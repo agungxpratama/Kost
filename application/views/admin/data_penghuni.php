@@ -43,7 +43,8 @@
                           <td><?= $r->email ?></td>
                           <td><?= $r->no_telp ?></td>
                           <td><?= $r->no_telp_wali ?></td>
-                          <td><?= $r->foto ?></td>
+                          <td><img src="<?= base_url('asset_registrasi/upload_pencari/'.$r->foto); ?>" alt="foto_pemilik <?= $r->foto ?>" width="100"></td>
+                          <!-- <td><?= $r->foto ?></td> -->
                           <td>
                               <a href="<?php echo base_url("index.php/admin/edit_penghuni/$r->id_pencari") ?>" class="btn btn-primary">Edit</a>
                               <a href="<?php echo base_url("index.php/admin/hapus_penghuni/$r->id_pencari") ?>" class="btn btn-danger">Hapus</a>

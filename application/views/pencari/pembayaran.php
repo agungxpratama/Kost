@@ -46,8 +46,8 @@
                                        </button>
                                      </div>
                                      <div class="modal-body">
-                                         <?php $rekening = $this->M_All->join_get_bayar($r->id_transaksi)->row(); ?>
-                                        Nomor Rekening : <?= $rekening->no_rek; ?>
+                                        Nomor Rekening :
+                                            <?= $r->no_rek; ?>
                                        <form id="bukti" class="form" action="<?= base_url('index.php/pencari/simpan_bukti') ?>" method="post">
                                            <label for="bukti">Masukan bukti pembayaran</label>
                                            <input class="form-control" type="file" name="foto" value="">

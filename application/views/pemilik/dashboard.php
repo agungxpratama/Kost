@@ -18,7 +18,7 @@
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jumlah Tamu</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                 <?= $this->M_All->count('pencari') ?>  orang</div>
+                 <?= $jumlah_orang ?>  orang</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -35,7 +35,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Kamar Kosong</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->M_All->count('kamar') ?> Kamar</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_kamar ?> Kamar</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -54,18 +54,14 @@
               <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Transaksi Yang diproses</div>
               <div class="row no-gutters align-items-center">
                   <?php
-                  $total_transaksi = $this->M_All->count('transaksi');
-                  $where = array('id_transaksi' => 0, );
-                  $yang_belum = $this->M_All->count_where('transaksi', $where);
-                  $f = $yang_belum/$total_transaksi;
-                  $persen = number_format($f*100, 0);
+
                   ?>
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $total_transaksi ?> Pesanan</div>
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $per['total_transaksi'] ?> Pesanan</div>
                 </div>
                 <div class="col">
                   <div class="progress progress-sm mr-2">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: <?= $persen ?>%" aria-valuenow="<?= $yang_belum ?>" aria-valuemin="0" aria-valuemax="<?= $total_transaksi ?>"></div>
+                    <div class="progress-bar bg-info" role="progressbar" style="width: <?= $per['persen'] ?>%" aria-valuenow="<?= $per['yang_belum'] ?>" aria-valuemin="0" aria-valuemax="<?= $per['total_transaksi'] ?>"></div>
                   </div>
                 </div>
               </div>
@@ -85,7 +81,7 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Sedang Diproses</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_transaksi-$yang_belum ?></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $per['total_transaksi']-$per['yang_belum'] ?></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-comments fa-2x text-gray-300"></i>

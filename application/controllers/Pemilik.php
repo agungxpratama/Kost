@@ -28,6 +28,21 @@ class Pemilik extends CI_Controller{
 		// } else{
 			// $sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
             // $data['nama']   = $this->conn->query($sql);
+		$total_transaksi = $this->M_All->count('transaksi');
+		$where = array('id_transaksi' => 0, );
+		$yang_belum = $this->M_All->count_where('transaksi', $where);
+		$f = 0;
+		if ($total_transaksi > 0) {
+			$f = $yang_belum/$total_transaksi;
+		}
+		$persen = number_format($f*100, 0);
+		$data['per'] = array(
+			'total_transaksi' => $total_transaksi,
+			'persen' => $persen,
+			'yang_belum' => $yang_belum,
+		);
+		$data['jumlah_orang'] = $this->M_All->count('pencari');
+		$data['jumlah_kamar'] = $this->M_All->count('kamar');
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
@@ -364,7 +379,7 @@ class Pemilik extends CI_Controller{
 	{
 		$where = array('kode_kamar' => $id);
 		$this->M_All->delete($where,'kamar');
-		redirect('index.php/pemilik/data_kamar'.$this->session->userdata('kode_kos'));
+		redirect('index.php/pemilik/edit_kos/'.$this->session->userdata('kode_kos'));
 	}
 
 }

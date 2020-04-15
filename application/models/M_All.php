@@ -63,14 +63,14 @@ class M_All extends CI_Model{
         return $this->db->get();
     }
 
-    function join_get_bayar($id)
+    function join_get_bayar()
     {
-        $this->db->select('no_rek');
+        $this->db->select('*');
         $this->db->from('transaksi');
         $this->db->join('kamar', 'kamar.kode_kamar = transaksi.kode_kamar');
         $this->db->join('kosan', 'kosan.kode_kos = kamar.kode_kamar');
         $this->db->join('pemilik', 'pemilik.id_pemilik = kosan.id_pemilik');
-        $this->db->where('id_transaksi', $id);
+        // $this->db->where('id_transaksi', $id);
         return $this->db->get();
     }
 

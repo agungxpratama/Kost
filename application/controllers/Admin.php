@@ -27,6 +27,21 @@ class Admin extends CI_Controller{
 		// } else{
 		// 	$sql      		= "SELECT nama_admin FROM admin WHERE username = '$_SESSION[username]';";
         //     $data['nama']   = $this->conn->query($sql);
+		$total_transaksi = $this->M_All->count('transaksi');
+		$where = array('id_transaksi' => 0, );
+		$yang_belum = $this->M_All->count_where('transaksi', $where);
+		$f = 0;
+		if ($total_transaksi > 0) {
+			$f = $yang_belum/$total_transaksi;
+		}
+		$persen = number_format($f*100, 0);
+		$data['per'] = array(
+			'total_transaksi' => $total_transaksi,
+			'persen' => $persen,
+			'yang_belum' => $yang_belum,
+		);
+		$data['jumlah_orang'] = $this->M_All->count('pencari');
+		$data['jumlah_kamar'] = $this->M_All->count('kamar');
 		$username = $this->session->userdata('username');
 		$where = array('username' => $username);
 		$data['nama'] = $this->M_All->view_where('admin', $where)->row();
@@ -56,7 +71,8 @@ class Admin extends CI_Controller{
 		$username = $this->session->userdata('username');
 		$where = array('username' => $username);
 		$data['nama'] = $this->M_All->view_where('admin', $where)->row();
-		$data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari')->result();
+		// $data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari')->result();
+		$data['result'] = $this->M_All->get('pencari')->result();
 		$this->load->view('admin/sidebar_admin');
 		$this->load->view('admin/header_admin', $data);
 		$this->load->view('admin/data_penghuni', $data);
@@ -298,17 +314,40 @@ class Admin extends CI_Controller{
 	{
 		$where = array('kode_kos' => $id);
 		$this->M_All->delete($where,'kosan');
-		redirect('index.php/admin/view_data_kos');
+		redirect('index.php/admin/data_kos');
 	}
 
-	public function edit_penghuni()
+	public function update_penghuni()
 	{
-		// code...
+		$where = array('id_pencari' => $this->input->post('id_pencari'), );
+		$data = array(
+			'nama_pencari' => $this->input->post('nama_pencari'),
+			'no_telp' => $this->input->post('no_telp'),
+			'email' => $this->input->post('email'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+			'status' => $this->input->post('status'),
+			'no_telp_wali' => $this->input->post('no_telp_wali'),
+		);
+		$this->M_All->update('pencari', $where, $data);
+		redirect('index.php/admin/data_penghuni');
+	}
+
+	public function edit_penghuni($id)
+	{
+		$where_ = array('id_pencari' => $id, );
+		$username = $this->session->userdata('username');
+		$where = array('username' => $username);
+		$data['nama'] = $this->M_All->view_where('admin', $where)->row();
+		$data['result'] = $this->M_All->view_where('pencari', $where_)->row();
+		$this->load->view('admin/sidebar_admin');
+		$this->load->view('admin/header_admin', $data);
+		$this->load->view('admin/edit_penghuni', $data);
+		$this->load->view('admin/foot_admin');
 	}
 
 	public function hapus_penghuni($id)
 	{
-		$where = array('id_penghuni' => $id);
+		$where = array('id_pencari' => $id);
 		$this->M_All->delete($where, 'pencari');
 		redirect('index.php/admin/data_penghuni');
 	}
