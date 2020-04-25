@@ -5,7 +5,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Artikel</h6>
         </div>
         <div class="card-body">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <?php foreach ($artikel as $art): ?>
                         <div class="carousel-item active">
@@ -19,7 +19,7 @@
                 <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
                <span class="sr-only">Next</span>  </a>
-            </div>
+            </div> -->
             <div class="card-columns">
     			<?php foreach ($artikel as $a): ?>
     				<div class="card">

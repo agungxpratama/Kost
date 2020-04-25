@@ -317,7 +317,7 @@ class Admin extends CI_Controller{
 		redirect('index.php/admin/data_kos');
 	}
 
-	public function update_penghuni()
+	public function update_pencari()
 	{
 		$where = array('id_pencari' => $this->input->post('id_pencari'), );
 		$data = array(

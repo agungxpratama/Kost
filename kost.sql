@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2020 at 08:41 PM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: Apr 25, 2020 at 04:14 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -107,7 +106,7 @@ CREATE TABLE `kosan` (
 --
 
 INSERT INTO `kosan` (`kode_kos`, `nama_kos`, `alamat`, `deskripsi`, `foto`, `jenis_kosan`, `saldo_kos`, `id_pemilik`) VALUES
-('1', 'Anjali', 'bojongsoang', 'Kosan anjali', 'D23MuROWoAEET34.jpg', 'Kosan camput', 123123, '1');
+('1', 'Anjali', 'Bojongsoang', 'Kosan anjali', 'D23MuROWoAEET34.jpg', 'Kosan camput', 123243, '1');
 
 -- --------------------------------------------------------
 
@@ -134,7 +133,8 @@ CREATE TABLE `pemilik` (
 --
 
 INSERT INTO `pemilik` (`id_pemilik`, `nama_pemilik`, `password`, `no_ktp`, `no_telp`, `email`, `no_rek`, `atas_nama_rek`, `bank`, `jenis_kelamin`, `foto`) VALUES
-('1', 'pemilik', '202cb962ac59075b964b07152d234b70', '123123', '1321323', 'pemilik@gmail.com', '123123123', 'pemilik', 'BRI', 'kepo', 'photo.png');
+('1', 'pemilik', '202cb962ac59075b964b07152d234b70', '123123', '1321323', 'pemilik@gmail.com', '123123123', 'pemilik', 'BRI', 'kepo', 'photo.png'),
+('pemilik', 'pemilik', '202cb962ac59075b964b07152d234b70', '123', '123', '123@gmail.com', '123', '123', '', 'Laki-laki', 'car.jpg');
 
 -- --------------------------------------------------------
 
@@ -164,9 +164,7 @@ CREATE TABLE `pencari` (
 --
 
 INSERT INTO `pencari` (`id_pencari`, `password`, `nama_pencari`, `instansi`, `tempat_lahir`, `tgl_lahir`, `asal_daerah`, `no_ktp`, `status`, `jenis_kelamin`, `email`, `no_telp`, `no_telp_wali`, `foto`) VALUES
-('1', '123', 'pencari', 'telkom', 'bengawan solo', '1999-12-06', 'solo', '123123123', 'mahasiwa', 'mau tau', 'pencari@gmail.com', '123123123', '123123123', 'photo.png'),
-('2', '202cb962ac59075b964b07152d234b70', 'annisa', 'Telkom University', 'bojs', '2020-03-12', 'bdg', '1234567890', 'Mahasiswa', 'Perempuan', 'pratama@gmail.com', '12345678901', '12568901231', '63931595-alien-wallpapers.jpg'),
-('4', '202cb962ac59075b964b07152d234b70', 'annisa', 'Telkom University', '123', '2020-03-19', 'bdg', '123', '123', 'Perempuan', '123@gmail.com', '123', '123', '63403951-alien-wallpapers.jpg');
+('1', '123', 'pencari', 'telkom', 'bengawan solo', '1999-12-06', 'solo', '123123123', 'mahasiwa', 'Laki-laki', 'pencari@gmail.com', '123123123', '123123123', 'photo.png');
 
 -- --------------------------------------------------------
 
@@ -205,7 +203,7 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `kode_kamar`, `id_pencari`, `total_bayar`, `tgl_bayar`, `tgl_masuk`, `tgl_keluar`, `sisa_pembayaran`, `status_transaksi`, `bukti_bayar`) VALUES
-('trx001', '1', '1', 120, '0000-00-00', '2020-04-23', '2020-05-27', 108, 1, '');
+('trx001', '1', '1', 120, '2020-04-25', '2020-04-23', '2020-05-27', 0, 2, 'car.jpg');
 
 --
 -- Indexes for dumped tables
@@ -280,7 +278,7 @@ ALTER TABLE `artikel`
 -- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `kode_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kode_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -290,7 +288,7 @@ ALTER TABLE `pengeluaran`
 -- Constraints for table `kamar`
 --
 ALTER TABLE `kamar`
-  ADD CONSTRAINT `kamar_ibfk_1` FOREIGN KEY (`kode_kos`) REFERENCES `kosan` (`kode_kos`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `kamar_ibfk_1` FOREIGN KEY (`kode_kos`) REFERENCES `kosan` (`kode_kos`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `kosan`
@@ -302,8 +300,8 @@ ALTER TABLE `kosan`
 -- Constraints for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_pencari`) REFERENCES `pencari` (`id_pencari`),
-  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`kode_kamar`) REFERENCES `kamar` (`kode_kamar`);
+  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_pencari`) REFERENCES `pencari` (`id_pencari`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`kode_kamar`) REFERENCES `kamar` (`kode_kamar`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

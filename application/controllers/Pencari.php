@@ -164,7 +164,8 @@ class Pencari extends CI_Controller{
 		if ( ! $this->upload->do_upload('foto')){
             $error = array('error' => $this->upload->display_errors());
             // $this->load->view('upload_form', $error);
-			echo "<script> alert('Foto Kos Gagal diunggah');</script>";
+			print_r($error);
+			// echo "<script> alert('Foto Kos Gagal diunggah');</script>";
         }else{
             $data = array('upload_data' => $this->upload->data());
             // $this->load->view('upload_success', $data);
@@ -175,8 +176,20 @@ class Pencari extends CI_Controller{
 			$data = array(
 				'status_transaksi' => 2,
 				'bukti_bayar' => $foto,
+				'tgl_bayar' => date('Y-m-d'),
+				'sisa_pembayaran' => 0,
 			);
 			if ($this->M_All->update('transaksi', $where, $data) != true) {
+				$transaksi = $this->M_All->view_where('transaksi', $where)->row();
+				$where_kamar = array('kode_kos' => $transaksi->kode_kamar, );
+				$kode_kos = $this->M_All->view_where('kamar', $where_kamar)->row();
+				$where_updatesal = array('kode_kos' => $kode_kos->kode_kos, );
+				$saldo = $this->M_All->view_where('kosan', $where_updatesal)->row();
+				print_r($saldo);
+				$saldo_akhir = ($saldo->saldo_kos + $transaksi->total_bayar);
+				$updatesal = array('saldo_kos' => $saldo_akhir, );
+				echo '<hr>total'.$saldo_akhir;
+				$this->M_All->update('kosan', $where_updatesal, $updatesal );
 				redirect('index.php/pencari/pembayaran/');
 				echo "<script> alert('Upload bukti berhasil diupload');</script>";
 			}else{

@@ -230,7 +230,7 @@ class Pemilik extends CI_Controller{
 			$string = '';
 			for ($i = 0; $i < 4; $i++) {
 				$pos = rand(0, strlen($karakter)-1);
-				$string .= $karakter{$pos};
+				$string .= $karakter($pos);
 			}
 			$kode_kos = substr($nama_kos, 1,4).$string;
 			$alamat = $this->input->post('alamat');
