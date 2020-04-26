@@ -36,12 +36,14 @@
 	<!-- Hero section -->
 	<section class="hero-section">
         <div class="container">
-            <div class="media">
+            <div class="card">
               <img width="25%" class="align-self-start mr-3" src=" <?= base_url('asset_admin/artikel/'.$artikel->foto) ?>" alt="Generic placeholder image">
-              <div class="media-body">
+              <div class="media-body p-3">
                 <h5 class="mt-0"><?= $artikel->judul ?></h5>
                 <p>Tanggal Atrikel : <?= $artikel->tgl_ubah ?></p>
-                <p><?= $artikel->deskripsi ?></p>
+				<div class="card-body">
+					<p><?= $artikel->deskripsi ?></p>
+				</div>
               </div>
             </div>
         </div>
