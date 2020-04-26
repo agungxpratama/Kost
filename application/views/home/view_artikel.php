@@ -42,7 +42,7 @@
                 <h5 class="mt-0"><?= $artikel->judul ?></h5>
                 <p>Tanggal Atrikel : <?= $artikel->tgl_ubah ?></p>
 				<div class="card-body">
-					<p><?= $artikel->deskripsi ?></p>
+					<?= $artikel->deskripsi ?>
 				</div>
               </div>
             </div>
