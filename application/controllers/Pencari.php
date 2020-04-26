@@ -121,7 +121,7 @@ class Pencari extends CI_Controller{
 
 		$this->load->view('pencari/sidebar_pencari');
 		$this->load->view('pencari/header_pencari', $data);
-		$this->load->view('pencari/', $data);
+		$this->load->view('pencari/about', $data);
 		$this->load->view('pencari/foot_pencari');
 	}
 

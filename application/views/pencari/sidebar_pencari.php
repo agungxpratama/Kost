@@ -91,7 +91,7 @@
        <li class="nav-item">
        <a class="nav-link collapsed" href="<?php echo base_url('index.php/pencari/pesan') ?>">
          <i class="fas fa-fw fa-folder"></i>
-         <span>Contact & About Us</span>
+         <span>About Us</span>
        </a>
      </li>
 

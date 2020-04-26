@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2020 at 04:14 PM
+-- Generation Time: Apr 26, 2020 at 08:44 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -54,7 +54,7 @@ CREATE TABLE `artikel` (
   `id_artikel` int(11) NOT NULL,
   `judul` varchar(255) NOT NULL,
   `kategori_artikel` varchar(255) NOT NULL,
-  `deskripsi` varchar(255) NOT NULL,
+  `deskripsi` text NOT NULL,
   `tgl_upload` date NOT NULL,
   `tgl_ubah` date NOT NULL,
   `foto` varchar(255) NOT NULL,
@@ -76,13 +76,6 @@ CREATE TABLE `kamar` (
   `status` varchar(255) NOT NULL,
   `tgl_tersedia` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `kamar`
---
-
-INSERT INTO `kamar` (`kode_kamar`, `kode_kos`, `harga`, `deskripsi`, `foto`, `status`, `tgl_tersedia`) VALUES
-('1', '1', 120, 'kamar fasilitas', '', 'kosong', '2020-03-19');
 
 -- --------------------------------------------------------
 
@@ -106,7 +99,7 @@ CREATE TABLE `kosan` (
 --
 
 INSERT INTO `kosan` (`kode_kos`, `nama_kos`, `alamat`, `deskripsi`, `foto`, `jenis_kosan`, `saldo_kos`, `id_pemilik`) VALUES
-('1', 'Anjali', 'Bojongsoang', 'Kosan anjali', 'D23MuROWoAEET34.jpg', 'Kosan camput', 123243, '1');
+('oonr2951', 'Moonroe', 'Bjs                        \r\n                      ', '12312', 'car.jpg', 'Putra', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -197,13 +190,6 @@ CREATE TABLE `transaksi` (
   `status_transaksi` int(11) NOT NULL,
   `bukti_bayar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`id_transaksi`, `kode_kamar`, `id_pencari`, `total_bayar`, `tgl_bayar`, `tgl_masuk`, `tgl_keluar`, `sisa_pembayaran`, `status_transaksi`, `bukti_bayar`) VALUES
-('trx001', '1', '1', 120, '2020-04-25', '2020-04-23', '2020-05-27', 0, 2, 'car.jpg');
 
 --
 -- Indexes for dumped tables
