@@ -33,14 +33,16 @@
                                 </button>
                             <?php elseif ($r->status_transaksi == 1): ?>
                                 <a href="<?= base_url('index.php/pencari/pembayaran'); ?>" class="btn btn-primary">
-                                    Belum adna bayar
+                                    Belum anda bayar
                                 </a>
                             <?php elseif ($r->status_transaksi == 2): ?>
                                 <button type="anchor" class="btn btn-success" disabled>
                                     Lunas
                                 </button>
                             <?php else: ?>
-                                Maaf Hubungi Pemilik atau Admin
+                                <button type="anchor" class="btn btn-danger" disabled>
+                                    Maaf Hubungi Pemilik atau Admin
+                                </button>
                             <?php endif; ?>
                             <!-- <?= $r->status ?> -->
                         </td>
