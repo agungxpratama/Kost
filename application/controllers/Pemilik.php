@@ -43,7 +43,8 @@ class Pemilik extends CI_Controller{
 		);
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
-		$data['jumlah_orang'] = $this->M_All->count('pencari');
+		// $data['jumlah_orang'] = $this->M_All->count('pencari');
+		$data['jumlah_orang'] = 0;
 		$data['jumlah_kamar'] = $this->M_All->count_('kamar', $where);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
 		$this->load->view('pemilik/sidebar_pemilik');
