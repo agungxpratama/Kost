@@ -158,7 +158,7 @@ class Pencari extends CI_Controller{
 		$config['upload_path']          = './asset_admin/bukti_bayar/';
 		$config['overwrite']        = true;
         $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 1024;
+        // $config['max_size']             = 1024;
 
 		$this->load->library('upload', $config);
 		if ( ! $this->upload->do_upload('foto')){

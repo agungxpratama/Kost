@@ -323,6 +323,18 @@ class Pemilik extends CI_Controller{
 		$this->load->view('pemilik/foot_pemilik');
 	}
 
+	public function update_kos()
+	{
+		$where = array('kode_kos' => $this->input->post('kode_kos'), );
+		$data = array(
+			'nama_kos' => $this->input->post('nama_kos'),
+			'alamat' => $this->input->post('alamat'),
+			'deskripsi' => $this->input->post('deskripsi'),
+		);
+		$this->M_All->update('kosan', $where, $data);
+		redirect('index.php/pemilik/view_data_kos');
+	}
+
 	public function hapus_kos($id)
 	{
 		$where = array('kode_kos' => $id);
@@ -335,7 +347,7 @@ class Pemilik extends CI_Controller{
 		$config['upload_path']          = './asset_admin/upload_kos/';
 		$config['overwrite']        = true;
         $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 1024;
+        // $config['max_size']             = 1024;
 		// $config['max_width']            = 1024;
         // $config['max_height']           = 768;
 
@@ -373,6 +385,31 @@ class Pemilik extends CI_Controller{
 				echo "<script> alert('Data Kos gagal ditambah');</script>";
 			}
         }
+	}
+
+	public function edit_kamar($id)
+	{
+		$where = array('id_pemilik' => $this->session->userdata('id_pemilik'));
+		$where_ = array('kode_kamar' => $id, );
+		$data['kamar'] = $this->M_All->view_where('kamar', $where_)->row();
+		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
+		$this->load->view('pemilik/sidebar_pemilik');
+		$this->load->view('pemilik/header_pemilik', $data);
+		$this->load->view('pemilik/view_kamar', $data);
+		$this->load->view('pemilik/foot_pemilik');
+	}
+
+	public function update_kamar()
+	{
+		$where = array('kode_kamar' => $this->input->post('kode_kamar'), );
+		$data = array(
+			'harga' => $this->input->post('harga'),
+			'deskripsi' => $this->input->post('deskripsi'),
+			'status' => $this->input->post('status'),
+			'tgl_tersedia' => $this->input->post('tgl_tersedia'),
+		);
+		$this->M_All->update('kamar', $where, $data);
+		redirect('index.php/pemilik/edit_kamar/'.$this->input->post('kode_kamar'));
 	}
 
 	public function hapus_kamar($id)

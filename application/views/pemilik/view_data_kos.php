@@ -3,7 +3,6 @@
          <!-- DataTales Example -->
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
            <h1 class="h3 mb-0 text-gray-800">Data Kost</h1>
-           <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button" data-toggle="modal" data-target="#myModal2"><i class="fas fa-pen fa-sm text-white-50"></i> Edit Kos</a> -->
            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Kamar</a>
          </div>
          <!-- Content Row -->
@@ -42,6 +41,7 @@
                            <label for="exampleFormControlInput1">Tanggal Tersedia</label>
                            <input type="date" class="form-control bg-light border-1 small" placeholder="Tanggal Tersedia" name="tgl_tersedia" aria-label="tanggalTersedia" aria-describedby="basic-addon2">
                        </div>
+
                  </div>
                  <div class="modal-footer">
                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -61,32 +61,30 @@
                      <span aria-hidden="true">&times;</span>
                    </button>
                  </div>
-                 <form action="<?= base_url()?>index.php/pemilik/edit_kamar" method="post" enctype="multipart/form-data">
+                 <form action="<?= base_url()?>index.php/pemilik/update_kos" method="post" enctype="multipart/form-data">
                  <div class="modal-body">
                        <div class="form-group">
                            <label for="exampleFormControlInput1">Kode Kos</label>
-                           <input type="text" class="form-control bg-light border-1 small" placeholder="Kode Kamar" name="kode_kamar" aria-label="kodeKamar" aria-describedby="basic-addon2">
+                           <p><?= $kos->kode_kos ?></p>
+                           <input type="hidden" value="<?= $kos->kode_kos ?>" placeholder="Kode Kos" name="kode_kos" aria-describedby="basic-addon2">
                        </div>
                        <div class="form-group">
                            <label for="exampleFormControlInput1">Nama Kos</label>
-                           <input type="text" class="form-control bg-light border-1 small" placeholder="Harga" name="harga" aria-label="harga" aria-describedby="basic-addon2">
+                           <input type="text" value="<?= $kos->nama_kos ?>" class="form-control bg-light border-1 small" placeholder="Nama Kos" name="nama_kos" aria-describedby="basic-addon2">
                        </div>
                        <div class="form-group">
                            <label for="exampleFormControlInput1">Alamat</label>
-                           <input type="text" class="form-control bg-light border-1 small" placeholder="Deskripsi" name="deskripsi" aria-label="deskripsi" aria-describedby="basic-addon2">
+                           <input type="text" value="<?= $kos->alamat ?>" class="form-control bg-light border-1 small" placeholder="Alamat" name="alamat" aria-describedby="basic-addon2">
                        </div>
                        <div class="form-group">
-                           <label for="exampleFormControlInput1">Status</label>
-                           <input type="text" class="form-control bg-light border-1 small" placeholder="Status" name="status" aria-label="statsu" aria-describedby="basic-addon2">
+                           <label for="exampleFormControlInput1">Deskripsi</label>
+                           <input type="text" value="<?= $kos->deskripsi ?>" class="form-control bg-light border-1 small" placeholder="Deskrips" name="deskripsi" aria-describedby="basic-addon2">
                        </div>
-                       <div class="form-group">
-                           <label for="exampleFormControlInput1">Tanggal Tersedia</label>
-                           <input type="date" class="form-control bg-light border-1 small" placeholder="Tanggal Tersedia" name="tgl_tersedia" aria-label="tanggalTersedia" aria-describedby="basic-addon2">
-                       </div>
-                       <div class="form-group">
-                           <label for="exampleFormControlInput1">Foto</label>
-                           <input type="file" class="form-control bg-light border-1 small" placeholder="Foto" name="foto" aria-label="foto" aria-describedby="basic-addon2">
-                       </div>
+                       <!-- <div class="form-group">
+                           <label for="exampleFormControlInput1">Jenis Kosan</label>
+                           <input type="date" value="" class="form-control bg-light border-1 small" placeholder="Jenis Kosan" name="jenis_kosan" aria-describedby="basic-addon2">
+                       </div> -->
+
                  </div>
                  <div class="modal-footer">
                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -123,6 +121,12 @@
                          <td>Jenis Kosan</td>
                          <td><?= $kos->jenis_kosan ?></td>
                      </tr>
+                     <tr>
+                         <td>
+                             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" type="button" data-toggle="modal" data-target="#myModal2"><i class="fas fa-pen fa-sm text-white-50"></i> Edit Kos</a>
+                         </td>
+                     </tr>
+
                  </table>
                </div>
                <hr>
@@ -156,8 +160,8 @@
                                      <td><?= $r->status; ?></td>
                                      <td><?= $r->tgl_tersedia; ?></td>
                                      <td>
-                                         <a href="<?php echo base_url("index.php/pemilik/hapus_kamar/$r->kode_kamar") ?>" class="btn btn-primary">Hapus</a>
-                                         <a href="<?php echo base_url("index.php/pemilik/edit_kamar/$r->kode_kamar") ?>" class="btn btn-danger">Edit</a>
+                                         <a href="<?php echo base_url("index.php/pemilik/hapus_kamar/$r->kode_kamar") ?>" class="btn btn-danger">Hapus</a>
+                                         <a href="<?php echo base_url("index.php/pemilik/edit_kamar/$r->kode_kamar") ?>" class="btn btn-warning">Edit</a>
                                      </td>
                                  </tr>
                              <?php endforeach; ?>
