@@ -29,8 +29,8 @@ class Pemilik extends CI_Controller{
 			// $sql      		= "SELECT nama_pemilik FROM pemilik WHERE id_pemilik = '$_SESSION[id_pemilik]';";
             // $data['nama']   = $this->conn->query($sql);
 		$total_transaksi = $this->M_All->count('transaksi');
-		$where = array('id_transaksi' => 0, );
-		$yang_belum = $this->M_All->count_where('transaksi', $where);
+		$where_ = array('id_transaksi' => 0, 'pemilik.id_pemilik' => $this->session->userdata('id_pemilik') );
+		$yang_belum = $this->M_All->join_get_bayar_($where_);
 		$f = 0;
 		if ($total_transaksi > 0) {
 			$f = $yang_belum/$total_transaksi;
@@ -41,10 +41,10 @@ class Pemilik extends CI_Controller{
 			'persen' => $persen,
 			'yang_belum' => $yang_belum,
 		);
-		$data['jumlah_orang'] = $this->M_All->count('pencari');
-		$data['jumlah_kamar'] = $this->M_All->count('kamar');
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
+		$data['jumlah_orang'] = $this->M_All->count('pencari');
+		$data['jumlah_kamar'] = $this->M_All->count_('kamar', $where);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
@@ -64,10 +64,12 @@ class Pemilik extends CI_Controller{
 		$where = array('id_pemilik' => $id_pemilik);
 		$where_ = array('pemilik.id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
-		$data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari', $where_)->result();
+		$data_['result'] = $this->M_All->join_transaksi_('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari', $where_)->result();
+		// print_r($data_);
+		// print_r($this->session->userdata());
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
-		$this->load->view('pemilik/booking', $data);
+		$this->load->view('pemilik/booking', $data_);
 		$this->load->view('pemilik/foot_pemilik');
 		// }
 	}

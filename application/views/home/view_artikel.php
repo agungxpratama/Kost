@@ -43,6 +43,8 @@
                 <p>Tanggal Atrikel : <?= $artikel->tgl_ubah ?></p>
 				<div class="card-body">
 					<?= $artikel->deskripsi ?>
+					<pre>
+					</pre>
 				</div>
               </div>
             </div>

@@ -100,7 +100,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Ngeko
 					</a>
 					<div class="card-body">
 						<h2 class="card-title"><?= $a->judul ?></h2>
-						<p class="card-text"><?= $a->deskripsi ?></p>
+						<p class="card-text"><?= substr($a->deskripsi, 0, 40) ?>...</p>
 					</div>
 					<div class="card-footer">
 						<small class="text-muted"><?= $a->tgl_upload ?></small>
