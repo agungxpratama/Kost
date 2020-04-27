@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2020 at 08:44 AM
+-- Generation Time: Apr 27, 2020 at 10:35 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -61,6 +61,13 @@ CREATE TABLE `artikel` (
   `username` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `artikel`
+--
+
+INSERT INTO `artikel` (`id_artikel`, `judul`, `kategori_artikel`, `deskripsi`, `tgl_upload`, `tgl_ubah`, `foto`, `username`) VALUES
+(6, 'Kos', '', '<br>Work Hard, Party Hard in a \\n Luxury Chalet in the Alps January 30, 2020 Admin  3 Far far away, behind the word mountains, <br> far from the countries Vokalia and Consonantia  Work Hard, Party Hard in a Luxury Chalet in the Alps January 30, 2020 Admin  3 Far far away, behind the word mountains, far from the countries Vokalia and Consonantia  Work Hard, Party Hard in a Luxury Chalet in the Alps January 30, 2020 Admin  3 Far far away, behind the word mountains, far from the countries Vokalia and Consonantia', '2020-04-26', '2020-04-26', 'car.jpg', 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -76,6 +83,14 @@ CREATE TABLE `kamar` (
   `status` varchar(255) NOT NULL,
   `tgl_tersedia` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kamar`
+--
+
+INSERT INTO `kamar` (`kode_kamar`, `kode_kos`, `harga`, `deskripsi`, `foto`, `status`, `tgl_tersedia`) VALUES
+('1', 'oonr4226', 1000000, 'Fasilitas', 'car.jpg', 'kosong', '2020-04-24'),
+('kamar12', 'oonr2951', 1000000, 'fasilitas', 'Coffee.jpg', 'kosong', '2020-04-27');
 
 -- --------------------------------------------------------
 
@@ -99,7 +114,8 @@ CREATE TABLE `kosan` (
 --
 
 INSERT INTO `kosan` (`kode_kos`, `nama_kos`, `alamat`, `deskripsi`, `foto`, `jenis_kosan`, `saldo_kos`, `id_pemilik`) VALUES
-('oonr2951', 'Moonroe', 'Bjs                        \r\n                      ', '12312', 'car.jpg', 'Putra', 0, '1');
+('oonr2951', 'Moonroe', 'Bjs                                              ', '12312', 'car.jpg', 'Putra', 50, '1'),
+('oonr4226', 'Moonroe', 'Bojongsoang', 'fasilitas lengkap', 'car.jpg', 'Putra', 0, 'pemilik');
 
 -- --------------------------------------------------------
 
@@ -169,7 +185,8 @@ CREATE TABLE `pengeluaran` (
   `kode_pengeluaran` int(11) NOT NULL,
   `keterangan_pengeluaran` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL
+  `jumlah` int(11) NOT NULL,
+  `id_pemilik` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -190,6 +207,14 @@ CREATE TABLE `transaksi` (
   `status_transaksi` int(11) NOT NULL,
   `bukti_bayar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `kode_kamar`, `id_pencari`, `total_bayar`, `tgl_bayar`, `tgl_masuk`, `tgl_keluar`, `sisa_pembayaran`, `status_transaksi`, `bukti_bayar`) VALUES
+('trx001', '1', '1', 1000000, '2020-04-27', '2020-04-11', '2020-10-10', 0, 2, 'car.jpg'),
+('trx002', 'kamar12', '1', 1000000, '2020-04-27', '2020-04-27', '2021-01-31', 0, 2, 'Coffee.jpg');
 
 --
 -- Indexes for dumped tables
@@ -258,7 +283,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `artikel`
 --
 ALTER TABLE `artikel`
-  MODIFY `id_artikel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_artikel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran`

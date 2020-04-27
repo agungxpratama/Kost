@@ -129,7 +129,7 @@ class Pemilik extends CI_Controller{
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
-		$data['result'] = $this->M_All->get('pengeluaran')->result();
+		$data['result'] = $this->M_All->get_where('pengeluaran', $where)->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
 		$this->load->view('pemilik/pengeluaran', $data);
@@ -143,6 +143,7 @@ class Pemilik extends CI_Controller{
 			'keterangan_pengeluaran' => $this->input->post('keterangan_pengeluaran'),
 			'harga' => $this->input->post('harga'),
 			'jumlah' => $this->input->post('jumlah'),
+			'id_pemilik' => $this->session->userdata('id_pemilik'),
 		);
 		$this->M_All->insert('pengeluaran', $data);
 		redirect('index.php/pemilik/pengeluaran');
