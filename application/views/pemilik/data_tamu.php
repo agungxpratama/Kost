@@ -28,6 +28,9 @@
                   <tbody>
                       <?php foreach ($result as $r): ?>
                       <tr>
+                          <?php
+                          $selisih = strtotime($r->tgl_keluar)-strtotime($r->tgl_masuk);
+                          $lama = ceil($selisih/(60*60*24*365)) ?>
                           <td><?= $r->nama_pencari ?></td>
                           <td><?= $r->instansi ?></td>
                           <td><?= $r->asal_daerah ?></td>
@@ -35,10 +38,18 @@
                           <td><?= $r->no_telp ?></td>
                           <td><?= $r->no_telp_wali ?></td>
                           <td><?= $r->email ?></td>
-                          <td></td>
+                          <td><?= $lama ?> Tahun</td>
                           <td><?= $r->tgl_masuk ?></td>
                           <td><?= $r->tgl_keluar ?></td>
-                          <td></td>
+                          <td>
+                              <?php if ($r->status_transaksi == 1): ?>
+                                  Belum Lunas
+                              <?php elseif ($r->status_transaksi == 2): ?>
+                                Lunas
+                                <?php else: ?>
+                                    Hubungi Admin
+                              <?php endif; ?>
+                          </td>
                           <td><?= $r->foto ?></td>
                       </tr>
                     <?php endforeach; ?>

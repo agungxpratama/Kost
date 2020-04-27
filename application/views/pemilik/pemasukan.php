@@ -29,8 +29,17 @@
                               <td><?= $no ?></td>
                               <td><?= $r->total_bayar ?></td>
                               <td><?= $r->tgl_bayar ?></td>
-                              <td><?= $r->status ?></td>
-                              <td></td>
+                              <td>
+                                  <?php if ($r->status_transaksi == 1): ?>
+                                      Belum Lunas
+                                  <?php elseif ($r->status_transaksi == 2): ?>
+                                    Lunas
+                                    <?php else: ?>
+                                        Hubungi Admin
+                                  <?php endif; ?>
+                                  <!-- <?= $r->status_transaksi ?> -->
+                              </td>
+                              <td>Nama Kos : <?= $r->nama_kos ?><br>Alamat Kos : <?= $r->alamat ?></td>
                           </tr>
                       <?php endforeach; ?>
                   </tbody>
