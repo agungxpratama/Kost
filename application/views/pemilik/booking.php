@@ -25,7 +25,7 @@
                           <td><?= $r->nama_kos ?></td>
                           <td><?= $r->kode_kos ?></td>
                           <td>
-                              <img src="<?= base_url('asset_admin/bukti_bayar/').$r->bukti_bayar ?>" alt="">
+                              <img src="<?= base_url('asset_admin/bukti_bayar/').$r->bukti_bayar ?>" alt="" height="200">
                           </td>
                           <td>
                               <?php if ($r->status_transaksi == 0): ?>
@@ -43,7 +43,7 @@
                               <?php else: ?>
                                   Maaf Hubungi Pemilik atau Admin
                               <?php endif; ?>
-                              <?= $r->status_transaksi ?>
+                              <!-- <?= $r->status_transaksi ?> -->
                           </td>
                       </tr>
                   <?php endforeach; ?>
