@@ -50,7 +50,7 @@
                                     Hubungi Admin
                               <?php endif; ?>
                           </td>
-                          <td><?= $r->foto ?></td>
+                          <td><img src="<?= base_url('asset_registrasi/upload_pencari/').$r->foto ?>" alt="" width="100"> </td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>
