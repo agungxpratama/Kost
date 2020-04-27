@@ -80,10 +80,10 @@
                            <label for="exampleFormControlInput1">Deskripsi</label>
                            <input type="text" value="<?= $kos->deskripsi ?>" class="form-control bg-light border-1 small" placeholder="Deskrips" name="deskripsi" aria-describedby="basic-addon2">
                        </div>
-                       <!-- <div class="form-group">
-                           <label for="exampleFormControlInput1">Jenis Kosan</label>
-                           <input type="date" value="" class="form-control bg-light border-1 small" placeholder="Jenis Kosan" name="jenis_kosan" aria-describedby="basic-addon2">
-                       </div> -->
+                       <div class="form-group">
+                           <label for="exampleFormControlInput1">Saldo Kos</label>
+                           <input type="text" value="<?= $kos->saldo_kos ?>" class="form-control bg-light border-1 small" placeholder="Saldo" name="saldo_kos" aria-describedby="basic-addon2">
+                       </div>
 
                  </div>
                  <div class="modal-footer">

@@ -86,7 +86,7 @@ class Pencari extends CI_Controller{
 		$id_pencari = $this->session->userdata('id_pencari');
 		$where = array('id_pencari' => $id_pencari);
 		$data['nama'] = $this->M_All->view_where('pencari', $where)->row();
-		$data['result'] = $this->M_All->get('transaksi')->result();
+		$data['result'] = $this->M_All->get_where('transaksi', $where)->result();
 
 		$this->load->view('pencari/sidebar_pencari');
 		$this->load->view('pencari/header_pencari', $data);
@@ -101,7 +101,7 @@ class Pencari extends CI_Controller{
 		$id_pencari = $this->session->userdata('id_pencari');
 		$where = array('id_pencari' => $id_pencari);
 		$data['nama'] = $this->M_All->view_where('pencari', $where)->row();
-		$data['result'] = $this->M_All->join_get_bayar()->result();
+		$data['result'] = $this->M_All->join_get_bayar($where)->result();
 		// $data['result'] = $this->M_All->get('transaksi')->result();
 		// $data['rek'] = $this->M_All->join_get_bayar($data['result'][0])->result();
 		// print_r($data);

@@ -12,6 +12,15 @@ class M_All extends CI_Model{
 		return $this->db->get_where($table,$where);
 	}
 
+    public function get_where($from, $where)
+    {
+        $this->db->select('*');
+        $this->db->from($from);
+        $this->db->where($where);
+        return $this->db->get();
+    }
+
+
 	public function insert($table,$data)
 	{
 		$this->db->insert($table,$data);
@@ -41,6 +50,18 @@ class M_All extends CI_Model{
         return $this->db->get();
     }
 
+    function join_transaksi_($from, $at, $at1, $at2, $at3, $where)
+    {
+        $this->db->select('*');
+        $this->db->from($from);
+        $this->db->join($at, 'transaksi.kode_kamar = kamar.kode_kamar');
+        $this->db->join($at1, 'kamar.kode_kos = kosan.kode_kos');
+        $this->db->join($at2, 'kosan.id_pemilik = pemilik.id_pemilik');
+        $this->db->join($at3, 'transaksi.id_pencari = pencari.id_pencari');
+        $this->db->where($where);
+        return $this->db->get();
+    }
+
     function join_transaksi($from, $at, $at1, $at2, $at3)
     {
         $this->db->select('*');
@@ -52,7 +73,7 @@ class M_All extends CI_Model{
         return $this->db->get();
     }
 
-    function join_($from, $at, $at1, $at2)
+    function join_($from, $at, $at1, $at2, $where)
     {
         $this->db->select('*');
         $this->db->from($from);
@@ -60,17 +81,18 @@ class M_All extends CI_Model{
         $this->db->join($at1, 'kamar.kode_kos = kosan.kode_kos');
         $this->db->join($at2, 'kosan.id_pemilik = pemilik.id_pemilik');
         // $this->db->join($at3, 'transaksi.id_pencari = pencari.id_pencari');
+        $this->db->where($where);
         return $this->db->get();
     }
 
-    function join_get_bayar()
+    function join_get_bayar($id)
     {
         $this->db->select('*');
         $this->db->from('transaksi');
         $this->db->join('kamar', 'kamar.kode_kamar = transaksi.kode_kamar');
         $this->db->join('kosan', 'kosan.kode_kos = kamar.kode_kos');
         $this->db->join('pemilik', 'pemilik.id_pemilik = kosan.id_pemilik');
-        // $this->db->where('id_transaksi', $id);
+        $this->db->where($id);
         return $this->db->get();
     }
 

@@ -99,7 +99,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Ngeko
 						<img class="card-img-top" src=" <?= base_url('asset_admin/artikel/'.$a->foto) ?>" alt="Card image cap">
 					</a>
 					<div class="card-body">
-						<h5 class="card-title"><?= $a->judul ?></h5>
+						<h2 class="card-title"><?= $a->judul ?></h2>
 						<p class="card-text"><?= $a->deskripsi ?></p>
 					</div>
 					<div class="card-footer">

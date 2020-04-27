@@ -62,8 +62,9 @@ class Pemilik extends CI_Controller{
             // $data['nama']   = $this->conn->query($sql);
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
+		$where_ = array('pemilik.id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
-		$data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari')->result();
+		$data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari', $where_)->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
 		$this->load->view('pemilik/booking', $data);
@@ -87,8 +88,9 @@ class Pemilik extends CI_Controller{
         //     $data['nama']   = $this->conn->query($sql);
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
+		$where_ = array('pemilik.id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
-		$data['result'] = $this->M_All->join_transaksi('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari')->result();
+		$data['result'] = $this->M_All->join_transaksi_('transaksi', 'kamar', 'kosan', 'pemilik', 'pencari', $where_)->result();
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
 		$this->load->view('pemilik/data_tamu', $data);
@@ -104,8 +106,10 @@ class Pemilik extends CI_Controller{
         //     $data['nama']   = $this->conn->query($sql);
 		$id_pemilik = $this->session->userdata('id_pemilik');
 		$where = array('id_pemilik' => $id_pemilik);
+		$where_ = array('pemilik.id_pemilik' => $id_pemilik);
 		$data['nama'] = $this->M_All->view_where('pemilik', $where)->row();
-		$data['result'] = $this->M_All->join_('transaksi', 'kamar', 'kosan', 'pemilik')->result();
+		$data['result'] = $this->M_All->join_('transaksi', 'kamar', 'kosan', 'pemilik', $where_)->result();
+		// print_r($data);
 		$this->load->view('pemilik/sidebar_pemilik');
 		$this->load->view('pemilik/header_pemilik', $data);
 		$this->load->view('pemilik/pemasukan', $data);
@@ -330,6 +334,7 @@ class Pemilik extends CI_Controller{
 			'nama_kos' => $this->input->post('nama_kos'),
 			'alamat' => $this->input->post('alamat'),
 			'deskripsi' => $this->input->post('deskripsi'),
+			'saldo_kos' => $this->input->post('saldo_kos'),
 		);
 		$this->M_All->update('kosan', $where, $data);
 		redirect('index.php/pemilik/view_data_kos');
