@@ -92,11 +92,11 @@ class Welcome extends CI_Controller {
             $password = $this->input->post('password');
 
             $where = array(
-                'username' => $username,
                 'password' => md5($password),
+				'username' => $username,
             );
 
-            $cek = $this->M_All->view_where('admin', $where);
+            $cek = $this->M_All->view_where('admin', $where)->num_rows();
 
             if ($cek > 0) {
                 $data_session = array(
@@ -107,7 +107,10 @@ class Welcome extends CI_Controller {
                 $this->session->set_userdata($data_session);
                 redirect(base_url('index.php/admin'));
             }else {
-            	redirect(base_url('index.php/welcome/login_admin'));
+				echo "<script> alert('Username atau Password Salah'); </script>";
+				$this->load->view('login/head_login');
+				$this->load->view('login/login_admin');
+				$this->load->view('login/foot_login');
             }
             // $sql      = "SELECT * FROM 'admin';";
             // $result   = $this->conn->query($sql);
@@ -132,11 +135,11 @@ class Welcome extends CI_Controller {
             $password = $this->input->post('password');
 
             $where = array(
-                'id_pencari' => $id_pencari,
+				'id_pencari' => $id_pencari,
                 'password' => md5($password),
             );
 
-            $cek = $this->M_All->view_where('pencari', $where);
+            $cek = $this->M_All->view_where('pencari', $where)->num_rows();
 
             if ($cek > 0) {
                 $data_session = array(
@@ -146,6 +149,12 @@ class Welcome extends CI_Controller {
 
                 $this->session->set_userdata($data_session);
                 redirect(base_url('index.php/pencari'));
+            }else {
+				echo "<script> alert('Username atau Password Salah'); </script>";
+				$this->load->view('login/head_login');
+				$this->load->view('login/login_pencari');
+				$this->load->view('login/foot_login');
+            	// redirect(base_url('index.php/welcome/login_pencari'));
             }
 
             // $sql      = "SELECT * FROM pencari;";
@@ -170,11 +179,11 @@ class Welcome extends CI_Controller {
             $password = $this->input->post('password');
 
             $where = array(
-                'id_pemilik' => $id_pemilik,
                 'password' => md5($password),
+				'id_pemilik' => $id_pemilik,
             );
 
-            $cek = $this->M_All->view_where('pemilik', $where);
+            $cek = $this->M_All->view_where('pemilik', $where)->num_rows();
 
             if ($cek > 0) {
                 $data_session = array(
@@ -184,6 +193,12 @@ class Welcome extends CI_Controller {
 
                 $this->session->set_userdata($data_session);
                 redirect(base_url('index.php/pemilik'));
+            }else {
+				echo "<script> alert('Username atau Password Salah'); </script>";
+				$this->load->view('login/head_login');
+				$this->load->view('login/login_pemilik');
+				$this->load->view('login/foot_login');
+            	// redirect(base_url('index.php/welcome/login_pemilik'));
             }
 
             // $sql      = "SELECT * FROM pemilik;";
