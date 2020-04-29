@@ -133,7 +133,10 @@ class Pencari extends CI_Controller{
 		$kode_kamar = $this->input->post('kode_kamar');
 		$id_pencari = $this->input->post('id_pencari');
 		$tgl_masuk = $this->input->post('tgl_masuk');
-		$tgl_keluar = $this->input->post('tgl_keluar');
+		// $tgl_keluar = $this->input->post('tgl_keluar');
+		// $tgl_keluar = strtotime(date("Y-m-d",strtotime($tgl_masuk)).'1');
+		// $tgl_keluar = date($tgl_masuk . " +1year");
+		$tgl_keluar = date('Y-m-d', strtotime($tgl_masuk. ' + 1 year'));
 		$selisih =  strtotime($tgl_keluar) - strtotime($tgl_masuk);
 		$selisih_tahun = ceil($selisih/(60*60*24*365));
 		$total_bayar = $harga * $selisih_tahun;

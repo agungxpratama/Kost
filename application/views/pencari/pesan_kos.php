@@ -85,20 +85,20 @@
                                         <input type="hidden" name="kode_kamar" value="<?= $r->kode_kamar; ?>">
                                         <input type="hidden" name="id_pencari" value="<?= $nama->id_pencari; ?>">
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlInput1">Dari Tanggal</label>
-                                                <input type="date" class="form-control" name="tgl_masuk">
-                                            </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Dari Tanggal</label>
+                                            <input type="date" class="form-control" name="tgl_masuk">
                                         </div>
+                                    </div>
+                                    <!-- <div class="row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Sampai Tanggal</label>
                                                 <input type="date" class="form-control" name="tgl_keluar">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

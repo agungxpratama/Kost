@@ -52,12 +52,14 @@
                       <th>Keterangan Pengeluaran</th>
                       <th>Harga</th>
                       <th>Jumlah</th>
+                      <th>Total</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                       <?php
                       $no = 0;
+                      $jumlah = 0;
                       foreach ($result as $r):
                           $no++?>
                           <tr>
@@ -65,6 +67,10 @@
                               <td><?= $r->keterangan_pengeluaran ?></td>
                               <td><?= $r->harga ?></td>
                               <td><?= $r->jumlah ?></td>
+                              <?php
+                              $jumlah = $r->harga*$r->jumlah;
+                               ?>
+                              <td><?= $jumlah ?></td>
                               <td>
                                   <button name="button" type="button" data-toggle="modal" data-target="#modal<?= $r->kode_pengeluaran ?>" class="btn btn-primary">Edit</button>
                                   <div class="modal fade" id="modal<?= $r->kode_pengeluaran ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,6 +96,8 @@
                                                 <div class="form-group">
                                                   <label for="exampleInputEmail1">Jumlah Pengeluaran</label>
                                                   <input type="text" class="form-control"  placeholder="" name="jumlah" value="<?= $r->jumlah ?>">
+                                                  <?php
+                                                  $jumlah_total += $jumlah ?>
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
@@ -105,6 +113,15 @@
                               </td>
                           </tr>
                       <?php endforeach; ?>
+                      <tfoot>
+                          <tr>
+                              <td colspan="4"><b>Total Jumlah</b></td>
+                              <td><?= $jumlah ?></td>
+                              <td>
+                                  <!-- <button type="button" name="button" class="btn btn-primary">Update</button> -->
+                              </td>
+                          </tr>
+                      </tfoot>
                   </tbody>
                 </table>
               </div>
